@@ -2,7 +2,7 @@
   <div class="aside-left rd-col-4">
     <div class="aside-panel">
       <div class="aside-head-avator">
-        <img class="aside-head-img" src="../../assets/img/avatar.jpg" alt="" />
+        <img class="aside-head-img" src="../assets/img/avatar.jpg" alt="" />
         <h3 class="aside-head-title">
           <a href="">
             文刀三授

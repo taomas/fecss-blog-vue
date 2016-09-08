@@ -14,10 +14,12 @@
         </ul>
       </div>
     </div>
+    <page-nav></page-nav>
   </div>
 </template>
 
 <script>
+import pageNav from './pageNav.vue'
 export default {
   data () {
     return {
@@ -49,6 +51,9 @@ export default {
         }
       ]
     }
+  },
+  components: {
+    'page-nav': pageNav
   }
 }
 </script>
@@ -64,6 +69,7 @@ export default {
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 4px 10px rgba(0, 0, 0, 0.06);
+    margin-bottom: 30px;
   }
 }
 

@@ -1,15 +1,23 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <div class="home-container rd-row-flex">
+      <side-left></side-left>
+      <router-view></router-view>
+      <sidebar></sidebar>
+    </div>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import sideLeft from './components/sideLeft.vue'
+import posts from './components/posts.vue'
+import sidebar from './components/sidebar.vue'
 
 export default {
   components: {
-    Hello
+    'side-left': sideLeft,
+    'posts': posts,
+    'sidebar': sidebar
   }
 }
 </script>
@@ -22,4 +30,10 @@ html, body {
   background: #f5f5f5;
 }
 
+.home-container {
+  position: relative;
+  width: 1120px;
+  padding: 80px 0 30px;
+  margin: 0 auto;
+}
 </style>
