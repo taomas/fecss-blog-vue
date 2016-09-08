@@ -1,5 +1,6 @@
-// import home from './components/home.vue'
 import posts from './components/posts.vue'
+import article from './components/article.vue'
+import write from './components/write.vue'
 
 export default function (router) {
   router.map({
@@ -7,7 +8,16 @@ export default function (router) {
       component: posts
     },
     '/posts': {
-      component: posts
+      component: posts,
+      name: 'posts'
+    },
+    '/article/:id': {
+      component: article,
+      name: 'article'
+    },
+    '/write': {
+      component: write,
+      name: 'write'
     }
   })
 }

@@ -11,10 +11,9 @@
         <span class="aside-head-subtitle">这是一个blog</span>
       </div>
       <ul class="aside-menu-list">
-        <li class="aside-menu-item">文章</li>
-        <li class="aside-menu-item">分类</li>
-        <li class="aside-menu-item">标签</li>
-        <li class="aside-menu-item">搜索</li>
+        <li class="aside-menu-item"
+          v-for="item in menus"
+          v-link="{name: item.sourceLink}">{{item.name}}</li>
       </ul>
     </div>
   </div>
@@ -25,10 +24,10 @@ export default {
   data () {
     return {
       menus: [
-        {name: '文章'},
-        {name: '分类'},
-        {name: '标签'},
-        {name: '搜索'}
+        {name: '文章', sourceLink: 'posts'},
+        {name: '分类', sourceLink: 'posts'},
+        {name: '标签', sourceLink: 'posts'},
+        {name: '搜索', sourceLink: 'write'}
       ]
     }
   },

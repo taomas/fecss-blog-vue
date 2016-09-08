@@ -5,7 +5,8 @@
       <div class="posts-article">
         <ul class="posts-article-list">
           <li class="posts-article-item" v-for="article in articles">
-            <h4 class="article-head-title">{{article.articleTitle}}</h4>
+            <h4 class="article-head-title"
+              v-link="{name: 'article', params: {id: article.sourceLink}}">{{article.articleTitle}}</h4>
             <span class="article-head-time">{{article.createTime}}</span>
             <p class="article-content-desc">
               {{article.articleContent}}
@@ -27,27 +28,32 @@ export default {
         {
           createTime: '2016年8月8日',
           articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。'
+          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
+          sourceLink: '123'
         },
         {
           createTime: '2016年8月8日',
           articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。'
+          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
+          sourceLink: '123'
         },
         {
           createTime: '2016年8月8日',
           articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。'
+          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
+          sourceLink: '123'
         },
         {
           createTime: '2016年8月8日',
           articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。'
+          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
+          sourceLink: '123'
         },
         {
           createTime: '2016年8月8日',
           articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。'
+          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
+          sourceLink: '123'
         }
       ]
     }

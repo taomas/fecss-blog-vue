@@ -1,10 +1,15 @@
 <template>
   <div id="app">
-    <div class="home-container rd-row-flex">
-      <side-left></side-left>
+    <template v-if="layoutStatus === 0">
+      <div class="home-container rd-row-flex">
+        <side-left></side-left>
+        <router-view></router-view>
+        <sidebar></sidebar>
+      </div>
+    </template>
+    <template v-else>
       <router-view></router-view>
-      <sidebar></sidebar>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -14,6 +19,22 @@ import posts from './components/posts.vue'
 import sidebar from './components/sidebar.vue'
 
 export default {
+  data () {
+    return {
+      layoutStatus: 0
+    }
+  },
+  beforeCompile () {
+    const path = window.location.href
+    this.$router.beforeEach(() => {
+      if (path.indexOf('write') !== -1) {
+        this.layoutStatus = 1
+      } else {
+        this.layoutStatus = 0
+      }
+      console.log(window.location.href)
+    })
+  },
   components: {
     'side-left': sideLeft,
     'posts': posts,
