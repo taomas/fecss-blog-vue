@@ -1,0 +1,13 @@
+.markdown-body {
+  h1,h2,h3,h4,h5,h6 {
+    &:before {
+      content: "#";
+      color: #42b983;
+      position: absolute;
+      left: -0.7em;
+      top: -2px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  }
+}

@@ -120,7 +120,7 @@ export default {
       border-bottom: 1px solid #eee;
     }
     &:hover {
-      background: rgba(0, 0, 0, 0.6);
+      background: #42b983;
       color: #f5f5f5;
     }
   }

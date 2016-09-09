@@ -11,7 +11,7 @@
           debounce="300"
           ></textarea>
       </div>
-      <div class="write-preview" v-html="markedArticle">
+      <div class="write-preview markdown-body" v-html="markedArticle">
       </div>
     </div>
     <div class="write-footer">
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import highlight from 'highlight.js'
 import marked from 'marked'
 export default {
   data () {
@@ -32,13 +33,42 @@ export default {
   },
   computed: {
     markedArticle () {
-      return marked(this.article)
+      const renderer = new marked.Renderer()
+      // renderer.heading = function (text, level) {
+      //   var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-')
+      //   return `<h${level}><a name="${escapedText}" class="anchor" href="#${escapedText}">
+      //           <span class="header-link"></span>
+      //           </a>${text}</h${level}>`
+      // }
+      // renderer.code = function (code, language) {
+      //   return '<pre class="code code-' + language + '">' + code + '</pre>'
+      // }
+      return marked(this.article, { renderer: renderer })
     }
+  },
+  watch: {
+    markedArticle () {
+      // highlight.configure({
+      //   tabReplace: '    '
+      // })
+      $('pre code').each(function (i, block) {
+        highlight.highlightBlock(block)
+      })
+    }
+  },
+  ready () {
+    // window.setInterval(() => {
+    //   console.log('123')
+    //   $('pre code').each(function (i, block) {
+    //     highlight.highlightBlock(block)
+    //   })
+    // }, 500)
   }
 }
 </script>
 
 <style scoped>
+@import '../assets/css/marked.css';
 .write-container {
   width: 1155px;
   height: auto;

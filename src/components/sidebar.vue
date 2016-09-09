@@ -94,7 +94,7 @@ export default {
     left: 0;
     height: 2px;
     width: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: #42b983;
     transition: all 0.4s ease-in;
   }
   &:hover {
