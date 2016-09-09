@@ -24,9 +24,9 @@ export default {
   data () {
     return {
       menus: [
-        {name: '文章', sourceLink: 'posts'},
-        {name: '分类', sourceLink: 'posts'},
-        {name: '标签', sourceLink: 'posts'},
+        {name: '文章', sourceLink: 'home'},
+        {name: '分类', sourceLink: 'home'},
+        {name: '标签', sourceLink: 'home'},
         {name: '搜索', sourceLink: 'write'}
       ]
     }

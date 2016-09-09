@@ -1,9 +1,13 @@
 <template>
-  <posts></posts>
+  <div class="home-container rd-row-flex">
+    <side-left></side-left>
+    <router-view></router-view>
+    <sidebar></sidebar>
+  </div>
 </template>
 
 <script>
-import sideLeft from './aside/sideLeft.vue'
+import sideLeft from './sideLeft.vue'
 import posts from './posts.vue'
 import sidebar from './sidebar.vue'
 
@@ -13,18 +17,18 @@ export default {
     }
   },
   components: {
-    aside: sideLeft,
-    posts: posts,
-    sidebar: sidebar
+    'side-left': sideLeft,
+    'posts': posts,
+    'sidebar': sidebar
   }
 }
 </script>
 
 <style scoped>
-/*.home-container {
+.home-container {
   position: relative;
   width: 1120px;
   padding: 80px 0 30px;
   margin: 0 auto;
-}*/
+}
 </style>

@@ -1,5 +1,12 @@
 <template>
   <div class="write-container">
+    <div class="write-head">
+      <ul class="write-head-nav">
+        <li class="write-head-item write-btn-home" v-link="{name: 'home'}">首页</li>
+        <li class="write-head-item write-btn-home">控制台</li>
+        <li class="write-head-item write-btn-confirm">发布</li>
+      </ul>
+    </div>
     <input class="write-head-title" type="text" name="title" placeholder="请输入标题"
       v-model="title">
     <input class="write-head-subtitle" type="text" name="name" name="subtitle" value="" placeholder="标签"
@@ -13,9 +20,6 @@
       </div>
       <div class="write-preview markdown-body" v-html="markedArticle">
       </div>
-    </div>
-    <div class="write-footer">
-      <button class="write-btn-confirm" type="button" name="button">发布</button>
     </div>
   </div>
 </template>
@@ -48,21 +52,12 @@ export default {
   },
   watch: {
     markedArticle () {
-      // highlight.configure({
-      //   tabReplace: '    '
-      // })
       $('pre code').each(function (i, block) {
         highlight.highlightBlock(block)
       })
     }
   },
   ready () {
-    // window.setInterval(() => {
-    //   console.log('123')
-    //   $('pre code').each(function (i, block) {
-    //     highlight.highlightBlock(block)
-    //   })
-    // }, 500)
   }
 }
 </script>
@@ -100,9 +95,10 @@ input {
 .write-content {
   box-sizing: border-box;
   width: 100%;
-  height: auto;
+  height: 500px;
   border: 1px solid #ccc;
   .write-panel {
+    position: relative;
     box-sizing: border-box;
     width: 50%;
     height: 100%;
@@ -115,6 +111,7 @@ input {
     padding: 10px;
     font-size: 14px;
     color: #333;
+    overflow-y: scroll;
   }
 }
 
@@ -123,7 +120,6 @@ input {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  min-height: 500px;
   line-height: 21px;
   margin: 0;
   padding: 10px;
@@ -132,22 +128,43 @@ input {
   resize: none;
   outline: none;
   border: 0;
+  z-index: 99;
 }
 
-.write-footer {
+.write-head {
   position: fixed;
-  bottom: 0;
-  width: 1155px;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 50px;
-  margin: 0 auto;
-  .write-btn-confirm {
-    float: right;
+  background: #fff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.12);
+  .write-head-nav {
+    width: 1155px;
+    height: 50px;
+    margin: 0 auto;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+  }
+  .write-head-item {
+    float: left;
     width: 80px;
-    height: 30px;
-    line-height: 30px;
-    margin-bottom: 10px;
+    height: 50px;
+    line-height: 50px;
     font-size: 14px;
     text-align: center;
+    border-right: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    &:hover {
+      background: #5b6064;
+      color: #f5f5f5;
+    }
+  }
+  .write-btn-confirm {
+    float: right;
+    border-left: 1px solid #ccc;
+    border-right: 0;
   }
 }
 </style>
