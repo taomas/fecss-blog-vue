@@ -1,14 +1,14 @@
 <template>
   <div class="home-container rd-row-flex">
     <side-left></side-left>
-    <posts></posts>
+    <page-article></page-article>
     <sidebar></sidebar>
   </div>
 </template>
 
 <script>
 import sideLeft from './sideLeft.vue'
-import posts from './posts.vue'
+import article from './article.vue'
 import sidebar from './sidebar.vue'
 
 export default {
@@ -18,7 +18,7 @@ export default {
   },
   components: {
     'side-left': sideLeft,
-    'posts': posts,
+    'page-article': article,
     'sidebar': sidebar
   }
 }

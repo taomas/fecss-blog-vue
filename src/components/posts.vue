@@ -6,7 +6,7 @@
         <ul class="posts-article-list">
           <li class="posts-article-item" v-for="article in articles">
             <h4 class="article-head-title"
-              v-link="{name: 'article', params: {id: article.sourceLink}}">{{article.articleTitle}}</h4>
+              v-link="{name: 'page', params: {id: article.sourceLink}}">{{article.articleTitle}}</h4>
             <span class="article-head-time">{{article.createTime}}</span>
             <p class="article-content-desc">
               {{article.articleContent}}

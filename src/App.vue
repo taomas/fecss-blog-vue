@@ -12,19 +12,7 @@ import sidebar from './components/sidebar.vue'
 export default {
   data () {
     return {
-      layoutStatus: 0
     }
-  },
-  beforeCompile () {
-    const path = window.location.href
-    this.$router.beforeEach(() => {
-      if (path.indexOf('write') !== -1) {
-        this.layoutStatus = 1
-      } else {
-        this.layoutStatus = 0
-      }
-      console.log(window.location.href)
-    })
   },
   components: {
     'side-left': sideLeft,

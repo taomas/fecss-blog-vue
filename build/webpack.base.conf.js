@@ -5,8 +5,7 @@ var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
   entry: {
-    app: './src/main.js',
-    admin: './src/admin.js'
+    app: './src/main.js'
   },
   output: {
     path: config.build.assetsRoot,
