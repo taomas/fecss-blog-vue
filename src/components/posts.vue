@@ -4,12 +4,12 @@
       <h1 class="posts-head-title">文章</h1>
       <div class="posts-article">
         <ul class="posts-article-list">
-          <li class="posts-article-item" v-for="article in articles">
+          <li class="posts-article-item" v-for="article in articleList">
             <h4 class="article-head-title"
-              v-link="{name: 'page', params: {id: article.sourceLink}}">{{article.articleTitle}}</h4>
+              v-link="{name: 'page', params: {id: article._id}}">{{article.title}}</h4>
             <span class="article-head-time">{{article.createTime}}</span>
             <p class="article-content-desc">
-              {{article.articleContent}}
+              {{{article.content}}}
             </p>
           </li>
         </ul>
@@ -21,41 +21,22 @@
 
 <script>
 import pageNav from './pageNav.vue'
+import {getArticleList} from '../vuex/actions'
+
 export default {
   data () {
     return {
-      articles: [
-        {
-          createTime: '2016年8月8日',
-          articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
-          sourceLink: '123'
-        },
-        {
-          createTime: '2016年8月8日',
-          articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
-          sourceLink: '123'
-        },
-        {
-          createTime: '2016年8月8日',
-          articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
-          sourceLink: '123'
-        },
-        {
-          createTime: '2016年8月8日',
-          articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
-          sourceLink: '123'
-        },
-        {
-          createTime: '2016年8月8日',
-          articleTitle: '始终相信努力奋斗的意义，因为那是本质问题',
-          articleContent: '你说你喜欢雨，但是下雨的时候，你却撑了伞；你说你喜欢阳光，但当阳光播撒的时候，你却躲阴凉之地；你说你喜欢风，但清风扑面的时候，你却关上了窗户。我害怕，你对我也是如此之爱。',
-          sourceLink: '123'
-        }
-      ]
+    }
+  },
+  ready () {
+    this.getArticleList()
+  },
+  vuex: {
+    getters: {
+      articleList: state => state.articleList.articleList
+    },
+    actions: {
+      getArticleList
     }
   },
   components: {

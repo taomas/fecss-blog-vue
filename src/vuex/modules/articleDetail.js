@@ -3,12 +3,12 @@ import {
 } from '../mutation-types'
 
 const state = {
-  articleDetail: {}
+  detail: {}
 }
 
 const mutations = {
-  [GET_ARTICLE_DETAIL] (state, articleDetail) {
-    state.articleDetail = articleDetail
+  [GET_ARTICLE_DETAIL] (state, detail) {
+    state.detail = detail
   }
 }
 

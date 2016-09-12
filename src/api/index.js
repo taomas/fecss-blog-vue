@@ -2,9 +2,14 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
+const API_ROOT = 'http://localhost:3000/'
 
+const articleResource = Vue.resource(API_ROOT + 'article{/id}')
 export default {
-  getArticleDetail () {
-    return Vue.http.get('http://localhost:3000/topic')
+  getArticleDetail (id) {
+    return articleResource.get({id: id})
+  },
+  getArticleList () {
+    return articleResource.get()
   }
 }

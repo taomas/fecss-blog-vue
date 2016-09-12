@@ -1,15 +1,14 @@
 <template>
   <div class="article-container rd-col-14">
     <article class="article-wrap">
-      <h1 class="article-head-title">{{article.title}}</h1>
+      <h1 class="article-head-title">{{articleDetail.title}}</h1>
       <ul class="article-nav-list">
         <li class="article-nav-item">
           <i class="icon-calendar ion-clock"></i>
-          {{article.createTime}}
+          {{articleDetail.createTime}}
         </li>
       </ul>
-      <p class="article-content">
-        {{article.articleContent}}
+      <p class="article-content" v-html="articleDetail.content">
       </p>
     </article>
   </div>
@@ -29,11 +28,13 @@ export default {
     }
   },
   ready () {
-    this.getArticleDetail()
+    let id = this.$route.params.id
+    console.log(id)
+    this.getArticleDetail(id)
   },
   vuex: {
     getters: {
-      articleDetail: state => state.articleDetail
+      articleDetail: state => state.articleDetail.detail
     },
     actions: {
       getArticleDetail
