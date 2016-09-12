@@ -20,16 +20,10 @@ import {getArticleDetail} from '../vuex/actions'
 export default {
   data () {
     return {
-      article: {
-        title: '多少红颜爱傻逼，多少傻逼不珍惜',
-        createTime: '2016-08-08',
-        articleContent: '多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜'
-      }
     }
   },
   ready () {
     let id = this.$route.params.id
-    console.log(id)
     this.getArticleDetail(id)
   },
   vuex: {
