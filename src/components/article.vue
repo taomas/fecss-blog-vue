@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import {getArticleDetail} from '../vuex/actions'
+
 export default {
   data () {
     return {
@@ -24,6 +26,17 @@ export default {
         createTime: '2016-08-08',
         articleContent: '多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜多少红颜爱傻逼，多少傻逼不珍惜'
       }
+    }
+  },
+  ready () {
+    this.getArticleDetail()
+  },
+  vuex: {
+    getters: {
+      articleDetail: state => state.articleDetail
+    },
+    actions: {
+      getArticleDetail
     }
   }
 }
