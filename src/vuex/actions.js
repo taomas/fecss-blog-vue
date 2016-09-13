@@ -7,8 +7,10 @@ export const getArticleDetail = ({dispatch}, opts) => {
   })
 }
 
-export const getArticleList = ({dispatch}) => {
-  api.getArticleList().then(function (res) {
+export const getArticleList = ({dispatch}, opts) => {
+  const startIndex = opts.start || 0
+  dispatch(types.UPDATE_START_INDEX, res.body)
+  api.getArticleList(opts).then(function (res) {
     dispatch(types.GET_ARTICLE_LIST, res.body)
   })
 }

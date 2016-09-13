@@ -44,7 +44,10 @@ export default {
     }
   },
   ready () {
-    this.getArticleList()
+    this.getArticleList({
+      start: 0,
+      limit: 5
+    })
   },
   vuex: {
     getters: {

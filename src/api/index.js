@@ -9,8 +9,8 @@ export default {
   getArticleDetail (id) {
     return articleResource.get({id: id})
   },
-  getArticleList () {
-    return articleResource.get()
+  getArticleList (opts) {
+    return articleResource.get({id: '', ...opts})
   },
   createArticle (opts) {
     return articleResource.save({id: 'create'}, opts)
