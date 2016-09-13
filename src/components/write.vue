@@ -1,12 +1,6 @@
 <template>
   <div class="write-container">
-    <div class="write-head">
-      <ul class="write-head-nav">
-        <li class="write-head-item write-btn-home" v-link="{name: 'home'}">首页</li>
-        <li class="write-head-item write-btn-home">控制台</li>
-        <li class="write-head-item write-btn-confirm">发布</li>
-      </ul>
-    </div>
+    <admin-header></admin-header>
     <input class="write-head-title" type="text" name="title" placeholder="请输入标题"
       v-model="title">
     <input class="write-head-subtitle" type="text" name="name" name="subtitle" value="" placeholder="标签"
@@ -27,6 +21,7 @@
 <script>
 import highlight from 'highlight.js'
 import marked from 'marked'
+import adminHeader from './common/adminHeader'
 export default {
   data () {
     return {
@@ -58,6 +53,9 @@ export default {
     }
   },
   ready () {
+  },
+  components: {
+    'admin-header': adminHeader
   }
 }
 </script>
@@ -65,7 +63,7 @@ export default {
 <style scoped>
 @import '../assets/css/marked.css';
 .write-container {
-  width: 1155px;
+  width: 70%;
   height: auto;
   margin: 0 auto;
   padding-top: 80px;
@@ -129,42 +127,5 @@ input {
   outline: none;
   border: 0;
   z-index: 99;
-}
-
-.write-head {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background: #fff;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.12);
-  .write-head-nav {
-    width: 1155px;
-    height: 50px;
-    margin: 0 auto;
-    border-right: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-  }
-  .write-head-item {
-    float: left;
-    width: 80px;
-    height: 50px;
-    line-height: 50px;
-    font-size: 14px;
-    text-align: center;
-    border-right: 1px solid #ccc;
-    background: #fff;
-    cursor: pointer;
-    &:hover {
-      background: #5b6064;
-      color: #f5f5f5;
-    }
-  }
-  .write-btn-confirm {
-    float: right;
-    border-left: 1px solid #ccc;
-    border-right: 0;
-  }
 }
 </style>
