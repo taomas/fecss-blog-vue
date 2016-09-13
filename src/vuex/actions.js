@@ -13,8 +13,18 @@ export const getArticleList = ({dispatch}) => {
   })
 }
 
+export const createArticle = ({dispatch}, opts) => {
+  return api.createArticle(opts).then(function (res) {
+    dispatch(types.SHOW_MESSAGE, res.body)
+  })
+}
+
 export const removeArticleById = ({dispatch}, opts) => {
-  api.removeArticleById(opts).then(function (res) {
+  return api.removeArticleById(opts).then(function (res) {
     console.log(res)
   })
+}
+
+export const distoryModelMessage = ({dispatch}) => {
+  dispatch(types.SHOW_MESSAGE, '')
 }

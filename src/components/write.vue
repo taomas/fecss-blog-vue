@@ -1,10 +1,13 @@
 <template>
   <div class="write-container">
-    <admin-header></admin-header>
+    <admin-nav>
+      <li class="write-btn-confirm"
+        @click="evtCreateArticle">发布</li>
+    </admin-nav>
     <input class="write-head-title" type="text" name="title" placeholder="请输入标题"
       v-model="title">
-    <input class="write-head-subtitle" type="text" name="name" name="subtitle" value="" placeholder="标签"
-      v-model="subTitle">
+    <input class="write-head-tags" type="text" name="name" name="tags" value="" placeholder="标签"
+      v-model="tags">
     <div class="write-content rd-row-flex">
       <div class="write-panel">
         <textarea class="write-panel-textarea"
@@ -21,12 +24,13 @@
 <script>
 import highlight from 'highlight.js'
 import marked from 'marked'
-import adminHeader from './common/adminHeader'
+import { createArticle } from '../vuex/actions'
+import adminNav from './common/adminNav'
 export default {
   data () {
     return {
       title: '',
-      subTitle: '',
+      tags: '',
       article: ''
     }
   },
@@ -50,12 +54,37 @@ export default {
       $('pre code').each(function (i, block) {
         highlight.highlightBlock(block)
       })
+    },
+    modelMessage (newVal, oldVal) {
+      if (newVal) {
+        this.$Modal.create('提示', newVal, () => {
+          this.$router.go({name: 'admin'})
+        })
+      }
     }
   },
-  ready () {
+  methods: {
+    evtCreateArticle () {
+      const opts = {
+        tags: this.tags,
+        title: this.title,
+        content: this.markedArticle
+      }
+      this.createArticle(opts)
+    }
+  },
+  created () {
+  },
+  vuex: {
+    getters: {
+      modelMessage: ({ createArticle }) => createArticle.modelMessage
+    },
+    actions: {
+      createArticle
+    }
   },
   components: {
-    'admin-header': adminHeader
+    'admin-nav': adminNav
   }
 }
 </script>
@@ -84,7 +113,7 @@ input {
   margin-bottom: 15px;
 }
 
-.write-head-subtitle {
+.write-head-tags {
   width: 100%;
   height: 35px;
   margin-bottom: 30px;
@@ -127,5 +156,21 @@ input {
   outline: none;
   border: 0;
   z-index: 99;
+}
+
+.write-btn-confirm {
+  float: right;
+  width: 80px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+  text-align: center;
+  border-left: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  &:hover {
+    background: #5b6064;
+    color: #f5f5f5;
+  }
 }
 </style>

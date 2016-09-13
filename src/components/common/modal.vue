@@ -1,5 +1,5 @@
 <template>
-  <div class='modal-mask' v-if="maskShow">
+  <div class='modal-mask' v-if="modalShow">
     <div class="modal-content"
       v-if="modalShow"
       transition="slideIn">
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { distoryModelMessage } from '../../vuex/actions'
 export default {
   data () {
     return {
@@ -48,16 +49,21 @@ export default {
       if (this.modal.confirm) {
         this.modal.confirm()
       }
+      this.distoryModelMessage()
       this.modal.show = false
     },
     cancel () {
       if (this.modal.cancel) {
         this.modal.cancel()
       }
+      this.distoryModelMessage()
       this.modal.show = false
     }
   },
-  ready () {
+  vuex: {
+    actions: {
+      distoryModelMessage
+    }
   }
 }
 </script>

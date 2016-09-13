@@ -1,6 +1,6 @@
 <template>
   <div class="admin">
-    <admin-header></admin-header>
+    <admin-nav></admin-nav>
     <div class="admin-content">
       <ul class="admin-table-head rd-row-flex">
         <li class="table-head-title">标题</li>
@@ -18,7 +18,7 @@
           <div class="table-content-operate">
             <i class="icon-edit ion-edit"></i>
             <i class="icon-delete ion-trash-a"
-              @click="evtRemoveArticle"
+              @click="evtRemoveArticle(article._id)"
             ></i>
           </div>
         </li>
@@ -30,7 +30,7 @@
 
 <script>
 import { getArticleList, removeArticleById } from '../vuex/actions'
-import adminHeader from './common/adminHeader'
+import adminNav from './common/adminNav'
 import pageNav from './pageNav'
 export default {
   data () {
@@ -39,15 +39,16 @@ export default {
   },
   methods: {
     evtRemoveArticle (articleId) {
-      this.$Modal.create('提示', '确认删除该文章！', function () {
-        console.log('弹框了')
-      }, function () {
-        console.log('隐藏了')
+      this.$Modal.create('提示', '确认删除该文章！', () => {
+        const opts = {
+          id: articleId
+        }
+        this.removeArticleById(opts).then(() => {
+          this.$Modal.create('提示', '删除文章成功', () => {
+            this.getArticleList()
+          })
+        })
       })
-      // const opts = {
-      //   id: articleId
-      // }
-      // this.removeArticleById(opts)
     }
   },
   ready () {
@@ -64,7 +65,7 @@ export default {
     }
   },
   components: {
-    'admin-header': adminHeader,
+    'admin-nav': adminNav,
     'page-nav': pageNav
   }
 }

@@ -3,7 +3,8 @@
     <ul class="write-head-nav">
       <li class="write-head-item write-btn-home" v-link="{name: 'home'}">首页</li>
       <li class="write-head-item write-btn-home" v-link="{name: 'admin'}">控制台</li>
-      <li class="write-head-item write-btn-confirm">发布</li>
+      <li class="write-head-item write-btn-home" v-link="{name: 'write'}">新增文章</li>
+      <slot></slot>
     </ul>
   </div>
 </template>

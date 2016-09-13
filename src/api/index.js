@@ -12,6 +12,9 @@ export default {
   getArticleList () {
     return articleResource.get()
   },
+  createArticle (opts) {
+    return articleResource.save({id: 'create'}, opts)
+  },
   removeArticleById (opts) {
     return articleResource.save({id: 'delete'}, opts)
   }
