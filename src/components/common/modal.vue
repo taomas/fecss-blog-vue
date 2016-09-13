@@ -1,5 +1,7 @@
 <template>
-  <div class='modal-mask' v-if="modalShow">
+  <div class="modal-container">
+    <div class="modal-mask" v-if="modalShow">
+    </div>
     <div class="modal-content"
       v-if="modalShow"
       transition="slideIn">

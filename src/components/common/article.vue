@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {getArticleDetail} from '../vuex/actions'
+import {getArticleDetail} from '../../vuex/actions'
 
 export default {
   data () {

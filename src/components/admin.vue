@@ -31,7 +31,7 @@
 <script>
 import { getArticleList, removeArticleById } from '../vuex/actions'
 import adminNav from './common/adminNav'
-import pageNav from './pageNav'
+import pageNav from './common/pageNav'
 export default {
   data () {
     return {

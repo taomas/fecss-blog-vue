@@ -1,7 +1,5 @@
 import home from './components/home.vue'
 import page from './components/page.vue'
-// import posts from './components/posts.vue'
-// import article from './components/article.vue'
 import write from './components/write.vue'
 import admin from './components/admin.vue'
 

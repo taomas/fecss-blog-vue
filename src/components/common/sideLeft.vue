@@ -2,7 +2,7 @@
   <div class="aside-left rd-col-4">
     <div class="aside-panel">
       <div class="aside-head-avator">
-        <img class="aside-head-img" src="../assets/img/avatar.jpg" alt="" />
+        <img class="aside-head-img" src="../../assets/img/avatar.jpg" alt="" />
         <h3 class="aside-head-title">
           <a href="">
             文刀三授
@@ -25,9 +25,9 @@ export default {
     return {
       menus: [
         {name: '文章', sourceLink: 'home'},
-        {name: '分类', sourceLink: 'home'},
-        {name: '标签', sourceLink: 'home'},
-        {name: '搜索', sourceLink: 'write'},
+        // {name: '分类', sourceLink: 'home'},
+        // {name: '标签', sourceLink: 'home'},
+        // {name: '搜索', sourceLink: 'write'},
         {name: '站长登陆', sourceLink: 'admin'}
       ]
     }

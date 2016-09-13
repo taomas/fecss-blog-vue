@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import sideLeft from './sideLeft.vue'
-import posts from './posts.vue'
-import sidebar from './sidebar.vue'
+import sideLeft from './common/sideLeft.vue'
+import posts from './common/posts.vue'
+import sidebar from './common/sidebar.vue'
 
 export default {
   data () {

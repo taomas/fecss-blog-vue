@@ -6,9 +6,6 @@
 </template>
 
 <script>
-import sideLeft from './components/sideLeft.vue'
-import posts from './components/posts.vue'
-import sidebar from './components/sidebar.vue'
 import modal from './components/common/modal.vue'
 import store from './vuex/store'
 
@@ -18,9 +15,6 @@ export default {
     }
   },
   components: {
-    'side-left': sideLeft,
-    'posts': posts,
-    'sidebar': sidebar,
     'modal': modal
   },
   store
