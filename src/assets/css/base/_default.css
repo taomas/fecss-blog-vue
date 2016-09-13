@@ -8,7 +8,8 @@ $warning-color          : #fa0;
 /*// ------ Base & Require ------*/
 $body-background        : #fff;
 
-$font-family            : "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+$font-family            : Lato, 'Microsoft Jhenghei', 'Helvetica Neue', Helvetica, STHeiTi, sans-serif;
+
 $code-family            : Consolas,Menlo,Courier,monospace;
 $text-color             : #444444;
 $font-size-base         : 12px;

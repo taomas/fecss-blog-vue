@@ -12,3 +12,9 @@ export const getArticleList = ({dispatch}) => {
     dispatch(types.GET_ARTICLE_LIST, res.body)
   })
 }
+
+export const removeArticleById = ({dispatch}, opts) => {
+  api.removeArticleById(opts).then(function (res) {
+    console.log(res)
+  })
+}

@@ -17,7 +17,9 @@
           </div>
           <div class="table-content-operate">
             <i class="icon-edit ion-edit"></i>
-            <i class="icon-delete ion-trash-a"></i>
+            <i class="icon-delete ion-trash-a"
+              @click="evtRemoveArticle"
+            ></i>
           </div>
         </li>
       </ul>
@@ -27,7 +29,7 @@
 </template>
 
 <script>
-import { getArticleList } from '../vuex/actions'
+import { getArticleList, removeArticleById } from '../vuex/actions'
 import adminHeader from './common/adminHeader'
 import pageNav from './pageNav'
 export default {
@@ -35,15 +37,30 @@ export default {
     return {
     }
   },
+  methods: {
+    evtRemoveArticle (articleId) {
+      this.$Modal.create('提示', '确认删除该文章！', function () {
+        console.log('弹框了')
+      }, function () {
+        console.log('隐藏了')
+      })
+      // const opts = {
+      //   id: articleId
+      // }
+      // this.removeArticleById(opts)
+    }
+  },
   ready () {
     this.getArticleList()
+    console.log(this.$Modal)
   },
   vuex: {
     getters: {
       articleList: state => state.articleList.articleList
     },
     actions: {
-      getArticleList
+      getArticleList,
+      removeArticleById
     }
   },
   components: {

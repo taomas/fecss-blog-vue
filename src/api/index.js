@@ -11,5 +11,8 @@ export default {
   },
   getArticleList () {
     return articleResource.get()
+  },
+  removeArticleById (opts) {
+    return articleResource.save({id: 'delete'}, opts)
   }
 }

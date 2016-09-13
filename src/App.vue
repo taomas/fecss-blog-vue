@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <modal></modal>
   </div>
 </template>
 
@@ -8,6 +9,7 @@
 import sideLeft from './components/sideLeft.vue'
 import posts from './components/posts.vue'
 import sidebar from './components/sidebar.vue'
+import modal from './components/common/modal.vue'
 import store from './vuex/store'
 
 export default {
@@ -18,7 +20,8 @@ export default {
   components: {
     'side-left': sideLeft,
     'posts': posts,
-    'sidebar': sidebar
+    'sidebar': sidebar,
+    'modal': modal
   },
   store
 }
@@ -38,5 +41,6 @@ html, body {
   width: 1120px;
   padding: 80px 0 30px;
   margin: 0 auto;
+  font-family: Lato, 'Microsoft Jhenghei', 'Helvetica Neue', Helvetica, STHeiTi, sans-serif;
 }
 </style>

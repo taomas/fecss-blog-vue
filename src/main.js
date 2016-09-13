@@ -4,9 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import routers from './routers.js'
+import modal from './plugin/modal.js'
 
 Vue.use(VueRouter)
-console.log('app')
+
+Vue.mixin({
+  created: function () {
+    // console.log(this.$root)
+    modal(Vue, this.$root)
+  }
+})
 
 const router = new VueRouter()
 routers(router)
