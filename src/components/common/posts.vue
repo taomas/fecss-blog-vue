@@ -51,7 +51,7 @@ export default {
   },
   vuex: {
     getters: {
-      articleList: state => state.articleList.articleList
+      articleList: state => state.articleList
     },
     actions: {
       getArticleList

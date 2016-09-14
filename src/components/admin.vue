@@ -9,7 +9,8 @@
       </ul>
       <ul class="admin-table-content">
         <li class="admin-table-item rd-row-flex" v-for="article in articleList">
-          <div class="table-content-title">
+          <div class="table-content-title"
+            v-link="{name: 'page', params: {id: article._id}}">
             {{article.title}}
           </div>
           <div class="table-content-time">
@@ -45,19 +46,25 @@ export default {
         }
         this.removeArticleById(opts).then(() => {
           this.$Modal.create('提示', '删除文章成功', () => {
-            this.getArticleList()
+            this.getArticleList({
+              start: this.startIndex,
+              limit: 5
+            })
           })
         })
       })
     }
   },
   ready () {
-    this.getArticleList()
-    console.log(this.$Modal)
+    this.getArticleList({
+      start: this.startIndex,
+      limit: 5
+    })
   },
   vuex: {
     getters: {
-      articleList: state => state.articleList.articleList
+      startIndex: state => state.startIndex,
+      articleList: state => state.articleList
     },
     actions: {
       getArticleList,

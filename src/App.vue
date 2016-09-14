@@ -14,6 +14,18 @@ export default {
     return {
     }
   },
+  watch: {
+    errorMessage (newVal, oldVal) {
+      if (newVal) {
+        this.$Modal.create('提示', newVal)
+      }
+    }
+  },
+  vuex: {
+    getters: {
+      errorMessage: state => state.errorMessage
+    }
+  },
   components: {
     'modal': modal
   },

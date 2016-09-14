@@ -77,7 +77,7 @@ export default {
   },
   vuex: {
     getters: {
-      modelMessage: ({ createArticle }) => createArticle.modelMessage
+      modelMessage: state => state.modelMessage
     },
     actions: {
       createArticle

@@ -15,20 +15,36 @@
 </template>
 
 <script>
-import {getArticleDetail} from '../../vuex/actions'
+import { getArticleDetail } from '../../vuex/actions'
 
 export default {
   data () {
     return {
     }
   },
-  ready () {
-    let id = this.$route.params.id
-    this.getArticleDetail(id)
+  computed: {
+    articleId () {
+      return this.$route.params.id
+    }
+  },
+  watch: {
+    articleId (newVal, oldVal) {
+      console.log(newVal)
+      this.getArticleDetail(newVal)
+    }
+  },
+  methods: {
+    toggleScrollTop () {
+      $(window).scrollTop(0)
+    }
+  },
+  created () {
+    this.getArticleDetail(this.articleId)
+    this.toggleScrollTop()
   },
   vuex: {
     getters: {
-      articleDetail: state => state.articleDetail.detail
+      articleDetail: state => state.articleDetail
     },
     actions: {
       getArticleDetail
