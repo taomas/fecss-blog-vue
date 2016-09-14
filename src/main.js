@@ -15,7 +15,9 @@ Vue.mixin({
   }
 })
 
-const router = new VueRouter()
+const router = new VueRouter({
+  history: true
+})
 routers(router)
 
 router.start(App, 'app')

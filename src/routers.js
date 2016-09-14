@@ -27,4 +27,8 @@ export default function (router) {
       name: 'login'
     }
   })
+
+  router.redirect({
+    '*': '/'
+  })
 }

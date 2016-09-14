@@ -1,3 +1,4 @@
+import cookies from 'js-cookie'
 import api from '../api'
 import * as types from './mutation-types'
 
@@ -26,13 +27,21 @@ export const getNewArticles = ({dispatch}) => {
 
 export const createArticle = ({dispatch}, opts) => {
   return api.createArticle(opts).then(function (res) {
-    dispatch(types.SHOW_MESSAGE, res.body)
+    if (res.body.ok) {
+      dispatch(types.SHOW_MESSAGE, res.body.message)
+    } else {
+      dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
+    }
   })
 }
 
 export const removeArticleById = ({dispatch}, opts) => {
   return api.removeArticleById(opts).then(function (res) {
-    console.log(res)
+    if (res.body.ok) {
+      dispatch(types.SHOW_MESSAGE, res.body.message)
+    } else {
+      dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
+    }
   })
 }
 
@@ -42,17 +51,22 @@ export const distoryModelMessage = ({dispatch}) => {
 
 export const userLogin = ({dispatch}, opts) => {
   return api.userLogin(opts).then(function (res) {
-    if (res.body.status === 1) {
+    if (res.body.ok) {
+      cookies.set('token', res.body.token, { expires: 7 })
       dispatch(types.SHOW_MESSAGE, res.body.message)
+      dispatch(types.SAVE_TOKEN, res.body.token)
     } else {
       dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
     }
-    console.log(res.body)
   })
 }
 
 export const userRegister = ({dispatch}, opts) => {
   return api.userRegister(opts).then(function (res) {
-    console.log(res)
+    if (res.body.ok) {
+      dispatch(types.SHOW_MESSAGE, res.body.message)
+    } else {
+      dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
+    }
   })
 }

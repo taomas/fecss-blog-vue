@@ -6,7 +6,8 @@ import {
   SHOW_MESSAGE,
   SHOW_ERROR_MESSAGE,
   UPDATE_START_INDEX,
-  GET_NEW_ARTICLES
+  GET_NEW_ARTICLES,
+  SAVE_TOKEN
 } from './mutation-types'
 
 Vue.use(Vuex)
@@ -18,7 +19,8 @@ const state = {
   modelMessage: '',
   errorMessage: '',
   startIndex: 0,
-  maxIndex: 0
+  maxIndex: 0,
+  token: ''
 }
 
 const mutations = {
@@ -40,6 +42,9 @@ const mutations = {
   },
   [GET_NEW_ARTICLES] (state, articleList) {
     state.newArticles = articleList.articles
+  },
+  [SAVE_TOKEN] (state, token) {
+    state.token = token
   }
 }
 
