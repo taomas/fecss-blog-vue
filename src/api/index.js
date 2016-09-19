@@ -8,10 +8,7 @@ const articleResource = Vue.resource(API_ROOT + 'articles{/id}')
 const usersResource = Vue.resource(API_ROOT + 'users{/id}')
 
 Vue.http.interceptors.push((request, next) => {
-  const token = cookies.get('token')
-  request.headers.token = token
-  console.log(request.headers)
-  // continue to next interceptor
+  Vue.http.headers.common['token'] = cookies.get('token') || ''
   next((response) => {
     if (response.status === 401) {
       window.location.pathname = '/login'

@@ -52,7 +52,9 @@ export const distoryModelMessage = ({dispatch}) => {
 export const userLogin = ({dispatch}, opts) => {
   return api.userLogin(opts).then(function (res) {
     if (res.body.ok) {
+      var oldToken = cookies.get('token')
       cookies.set('token', res.body.token, { expires: 7 })
+      console.log(res.body.token === oldToken)
       dispatch(types.SHOW_MESSAGE, res.body.message)
       dispatch(types.SAVE_TOKEN, res.body.token)
     } else {
