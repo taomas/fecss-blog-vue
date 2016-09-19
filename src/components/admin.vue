@@ -8,7 +8,7 @@
         <li class="table-head-operate">选项</li>
       </ul>
       <ul class="admin-table-content">
-        <li class="admin-table-item rd-row-flex" v-for="article in articleList">
+        <li class="admin-table-item rd-row-flex" v-for="article in adminArticles">
           <div class="table-content-title"
             v-link="{name: 'page', params: {id: article._id}}">
             {{article.title}}
@@ -30,15 +30,19 @@
 </template>
 
 <script>
-import { getArticleList, removeArticleById } from '../vuex/actions'
+import { getAdminArticles, removeArticleById } from '../vuex/actions'
 import adminNav from './common/adminNav'
 import pageNav from './common/pageNav'
 export default {
   data () {
     return {
+      start: 0
     }
   },
   methods: {
+    getArticles (opts) {
+      this.getAdminArticles(opts)
+    },
     evtRemoveArticle (articleId) {
       this.$Modal.create('提示', '确认删除该文章！', () => {
         const opts = {
@@ -46,7 +50,7 @@ export default {
         }
         this.removeArticleById(opts).then(() => {
           this.$Modal.create('提示', '删除文章成功', () => {
-            this.getArticleList({
+            this.getAdminArticles({
               start: this.startIndex,
               limit: 5
             })
@@ -56,18 +60,19 @@ export default {
     }
   },
   ready () {
-    this.getArticleList({
-      start: this.startIndex,
+    this.getAdminArticles({
+      start: 0,
       limit: 5
     })
   },
   vuex: {
     getters: {
       startIndex: state => state.startIndex,
-      articleList: state => state.articleList
+      articleList: state => state.articleList,
+      adminArticles: state => state.adminArticles
     },
     actions: {
-      getArticleList,
+      getAdminArticles,
       removeArticleById
     }
   },

@@ -3,9 +3,9 @@ import Vuex from 'vuex'
 import {
   GET_ARTICLE_DETAIL,
   GET_ARTICLE_LIST,
+  GET_ADMIN_ARTICLES,
   SHOW_MESSAGE,
   SHOW_ERROR_MESSAGE,
-  UPDATE_START_INDEX,
   GET_NEW_ARTICLES,
   SAVE_TOKEN
 } from './mutation-types'
@@ -20,7 +20,8 @@ const state = {
   errorMessage: '',
   startIndex: 0,
   maxIndex: 0,
-  token: ''
+  token: '',
+  adminArticles: []
 }
 
 const mutations = {
@@ -37,14 +38,15 @@ const mutations = {
   [SHOW_ERROR_MESSAGE] (state, message) {
     state.errorMessage = message
   },
-  [UPDATE_START_INDEX] (state, startIndex) {
-    state.startIndex = startIndex
-  },
   [GET_NEW_ARTICLES] (state, articleList) {
     state.newArticles = articleList.articles
   },
   [SAVE_TOKEN] (state, token) {
     state.token = token
+  },
+  [GET_ADMIN_ARTICLES] (state, adminArticles) {
+    state.adminArticles = adminArticles.articles
+    state.maxIndex = adminArticles.maxIndex
   }
 }
 

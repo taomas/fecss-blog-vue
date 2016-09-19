@@ -6,6 +6,7 @@ Vue.use(VueResource)
 const API_ROOT = 'http://localhost:3000/'
 const articleResource = Vue.resource(API_ROOT + 'articles{/id}')
 const usersResource = Vue.resource(API_ROOT + 'users{/id}')
+const adminResource = Vue.resource(API_ROOT + 'admin{/id}')
 
 Vue.http.interceptors.push((request, next) => {
   Vue.http.headers.common['token'] = cookies.get('token') || ''
@@ -23,9 +24,6 @@ export default {
   getArticleList (opts) {
     return articleResource.get({id: '', ...opts})
   },
-  createArticle (opts) {
-    return articleResource.save({id: 'create'}, opts)
-  },
   removeArticleById (opts) {
     return articleResource.save({id: 'delete'}, opts)
   },
@@ -34,5 +32,11 @@ export default {
   },
   userRegister (opts) {
     return usersResource.save({id: 'register'}, opts)
+  },
+  getAdminArticles (opts) {
+    return adminResource.get({id: '', ...opts})
+  },
+  createArticle (opts) {
+    return adminResource.save({id: 'create'}, opts)
   }
 }

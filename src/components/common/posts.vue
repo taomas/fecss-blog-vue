@@ -31,7 +31,7 @@
 
 <script>
 import pageNav from './pageNav.vue'
-import {getArticleList} from '../../vuex/actions'
+import { getArticleList } from '../../vuex/actions'
 
 export default {
   data () {
@@ -41,6 +41,11 @@ export default {
   filters: {
     substrArticle (value) {
       return value.substr(0, 50)
+    }
+  },
+  methods: {
+    getArticles (opts) {
+      this.getArticleList(opts)
     }
   },
   ready () {

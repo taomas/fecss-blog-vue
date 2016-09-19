@@ -2,6 +2,15 @@ import cookies from 'js-cookie'
 import api from '../api'
 import * as types from './mutation-types'
 
+const needAuth = function () {
+  const path = window.location.href
+  if (path.indexOf('admin') !== -1) {
+    return 0
+  } else {
+    return 1
+  }
+}
+
 export const getArticleDetail = ({dispatch}, opts) => {
   api.getArticleDetail(opts).then(function (res) {
     dispatch(types.GET_ARTICLE_DETAIL, res.body)
@@ -9,10 +18,14 @@ export const getArticleDetail = ({dispatch}, opts) => {
 }
 
 export const getArticleList = ({dispatch}, opts) => {
-  const startIndex = opts.start || 0
-  dispatch(types.UPDATE_START_INDEX, startIndex)
   api.getArticleList(opts).then(function (res) {
     dispatch(types.GET_ARTICLE_LIST, res.body)
+  })
+}
+
+export const getAdminArticles = ({dispatch}, opts) => {
+  api.getAdminArticles(opts).then(function (res) {
+    dispatch(types.GET_ADMIN_ARTICLES, res.body)
   })
 }
 
@@ -26,6 +39,7 @@ export const getNewArticles = ({dispatch}) => {
 }
 
 export const createArticle = ({dispatch}, opts) => {
+  opts['needAuth'] = needAuth()
   return api.createArticle(opts).then(function (res) {
     if (res.body.ok) {
       dispatch(types.SHOW_MESSAGE, res.body.message)
@@ -36,6 +50,7 @@ export const createArticle = ({dispatch}, opts) => {
 }
 
 export const removeArticleById = ({dispatch}, opts) => {
+  opts['needAuth'] = needAuth()
   return api.removeArticleById(opts).then(function (res) {
     if (res.body.ok) {
       dispatch(types.SHOW_MESSAGE, res.body.message)

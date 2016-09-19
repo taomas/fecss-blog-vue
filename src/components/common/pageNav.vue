@@ -39,7 +39,7 @@ export default {
         start: this.start,
         limit: this.limit
       }
-      this.getArticleList(opts)
+      this.$parent.getArticles(opts)
     },
     evtTogglePre () {
       this.start--
@@ -47,7 +47,7 @@ export default {
         start: this.start,
         limit: this.limit
       }
-      this.getArticleList(opts)
+      this.$parent.getArticles(opts)
     }
   },
   vuex: {
