@@ -17,14 +17,16 @@
             {{article.createTime}}
           </div>
           <div class="table-content-operate">
-            <i class="icon-edit ion-edit"></i>
+            <i class="icon-edit ion-edit"
+              v-link="{name: 'edit', params: {id: article._id}}"
+            ></i>
             <i class="icon-delete ion-trash-a"
               @click="evtRemoveArticle(article._id)"
             ></i>
           </div>
         </li>
       </ul>
-      <page-nav></page-nav>
+      <page-nav :start="start"></page-nav>
     </div>
   </div>
 </template>
@@ -36,11 +38,25 @@ import pageNav from './common/pageNav'
 export default {
   data () {
     return {
-      start: 0
+      start: 0,
+      limit: 5
     }
   },
   methods: {
-    getArticles (opts) {
+    evtToggleNext () {
+      this.start++
+      const opts = {
+        start: this.start,
+        limit: this.limit
+      }
+      this.getAdminArticles(opts)
+    },
+    evtTogglePre () {
+      this.start--
+      const opts = {
+        start: this.start,
+        limit: this.limit
+      }
       this.getAdminArticles(opts)
     },
     evtRemoveArticle (articleId) {

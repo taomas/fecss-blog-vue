@@ -7,7 +7,7 @@ import {
   SHOW_MESSAGE,
   SHOW_ERROR_MESSAGE,
   GET_NEW_ARTICLES,
-  SAVE_TOKEN
+  UPDATE_EDIT_ARTICLE
 } from './mutation-types'
 
 Vue.use(Vuex)
@@ -20,8 +20,8 @@ const state = {
   errorMessage: '',
   startIndex: 0,
   maxIndex: 0,
-  token: '',
-  adminArticles: []
+  adminArticles: [],
+  editArticle: {}
 }
 
 const mutations = {
@@ -41,12 +41,12 @@ const mutations = {
   [GET_NEW_ARTICLES] (state, articleList) {
     state.newArticles = articleList.articles
   },
-  [SAVE_TOKEN] (state, token) {
-    state.token = token
-  },
   [GET_ADMIN_ARTICLES] (state, adminArticles) {
     state.adminArticles = adminArticles.articles
     state.maxIndex = adminArticles.maxIndex
+  },
+  [UPDATE_EDIT_ARTICLE] (state, editArticle) {
+    state.editArticle = editArticle
   }
 }
 

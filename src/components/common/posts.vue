@@ -25,7 +25,7 @@
         </ul>
       </div>
     </div>
-    <page-nav></page-nav>
+    <page-nav :start="start"></page-nav>
   </div>
 </template>
 
@@ -36,6 +36,8 @@ import { getArticleList } from '../../vuex/actions'
 export default {
   data () {
     return {
+      start: 0,
+      limit: 5
     }
   },
   filters: {
@@ -44,7 +46,20 @@ export default {
     }
   },
   methods: {
-    getArticles (opts) {
+    evtToggleNext () {
+      this.start++
+      const opts = {
+        start: this.start,
+        limit: this.limit
+      }
+      this.getArticleList(opts)
+    },
+    evtTogglePre () {
+      this.start--
+      const opts = {
+        start: this.start,
+        limit: this.limit
+      }
       this.getArticleList(opts)
     }
   },

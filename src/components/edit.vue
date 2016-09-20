@@ -2,16 +2,17 @@
   <div class="write-container">
     <admin-nav>
       <li class="write-btn-confirm"
-        @click="evtCreateArticle">发布</li>
+        @click="evtEditArticle">修改</li>
     </admin-nav>
-    <input class="write-head-title" type="text" name="title" placeholder="请输入标题"
-      v-model="title">
-    <input class="write-head-tags" type="text" name="name" name="tags" value="" placeholder="标签"
-      v-model="tags">
+    <h3 class="edit-title">{{articleDetail.title}}</h3>
+    <div class="edit-sub-title">
+      <span>{{articleDetail.createTime}}</span>
+      <span>{{articleDetail.tags}}</span>
+    </div>
     <div class="write-content rd-row-flex">
       <div class="write-panel">
         <textarea class="write-panel-textarea"
-          v-model="article"
+          v-model="articleDetail.sourceContent"
           debounce="300"
           ></textarea>
       </div>
@@ -24,43 +25,18 @@
 <script>
 import highlight from 'highlight.js'
 import marked from 'marked'
-import { createArticle } from '../vuex/actions'
+import { createArticle, getArticleDetail, updateArticle } from '../vuex/actions'
 import adminNav from './common/adminNav'
 export default {
   data () {
     return {
-      title: '',
-      tags: '',
-      article: ''
     }
   },
-  // props: {
-  //   title: {
-  //     type: String,
-  //     default: ''
-  //   },
-  //   tags: {
-  //     type: String,
-  //     default: ''
-  //   },
-  //   article: {
-  //     type: String,
-  //     default: ''
-  //   }
-  // },
   computed: {
     markedArticle () {
-      const renderer = new marked.Renderer()
-      // renderer.heading = function (text, level) {
-      //   var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-')
-      //   return `<h${level}><a name="${escapedText}" class="anchor" href="#${escapedText}">
-      //           <span class="header-link"></span>
-      //           </a>${text}</h${level}>`
-      // }
-      // renderer.code = function (code, language) {
-      //   return '<pre class="code code-' + language + '">' + code + '</pre>'
-      // }
-      return marked(this.article, { renderer: renderer })
+      let renderer = new marked.Renderer()
+      let content = this.articleDetail.sourceContent || ''
+      return marked(content, { renderer: renderer })
     }
   },
   watch: {
@@ -78,25 +54,32 @@ export default {
     }
   },
   methods: {
-    evtCreateArticle () {
+    evtEditArticle () {
       const opts = {
-        tags: this.tags,
-        title: this.title,
-        sourceContent: this.article,
-        content: this.markedArticle
+        articleId: this.$route.params.id,
+        articleDetail: this.articleDetail
       }
-      this.createArticle(opts)
+      console.log(opts)
+      this.updateArticle(opts)
+    },
+    getEditArticle () {
+      const articleId = this.$route.params.id
+      this.getArticleDetail(articleId)
     }
   },
-  created () {
+  ready () {
+    this.getEditArticle()
   },
   vuex: {
     getters: {
+      articleDetail: state => state.articleDetail,
       editArticle: state => state.editArticle,
       modelMessage: state => state.modelMessage
     },
     actions: {
-      createArticle
+      createArticle,
+      getArticleDetail,
+      updateArticle
     }
   },
   components: {

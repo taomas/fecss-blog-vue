@@ -20,8 +20,6 @@ import { getArticleList } from '../../vuex/actions'
 export default {
   data () {
     return {
-      start: 0,
-      limit: 5
     }
   },
   computed: {
@@ -32,22 +30,18 @@ export default {
       return this.start < this.maxIndex
     }
   },
+  props: {
+    start: {
+      type: Number,
+      required: true
+    }
+  },
   methods: {
     evtToggleNext () {
-      this.start++
-      const opts = {
-        start: this.start,
-        limit: this.limit
-      }
-      this.$parent.getArticles(opts)
+      this.$parent.evtToggleNext()
     },
     evtTogglePre () {
-      this.start--
-      const opts = {
-        start: this.start,
-        limit: this.limit
-      }
-      this.$parent.getArticles(opts)
+      this.$parent.evtTogglePre()
     }
   },
   vuex: {

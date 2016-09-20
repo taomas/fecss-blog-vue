@@ -8,13 +8,14 @@
           {{articleDetail.createTime}}
         </li>
       </ul>
-      <p class="article-content" v-html="articleDetail.content">
+      <p class="article-content" v-html="content">
       </p>
     </article>
   </div>
 </template>
 
 <script>
+import marked from 'marked'
 import { getArticleDetail } from '../../vuex/actions'
 
 export default {
@@ -22,15 +23,16 @@ export default {
     return {
     }
   },
+  filters: {
+    marked
+  },
   computed: {
     articleId () {
       return this.$route.params.id
-    }
-  },
-  watch: {
-    articleId (newVal, oldVal) {
-      console.log(newVal)
-      this.getArticleDetail(newVal)
+    },
+    content () {
+      const sourceContent = this.articleDetail.sourceContent || ''
+      return marked(sourceContent)
     }
   },
   methods: {
@@ -38,8 +40,8 @@ export default {
       $(window).scrollTop(0)
     }
   },
-  created () {
-    this.getArticleDetail(this.articleId)
+  ready () {
+    this.getArticleDetail(this.$route.params.id)
     this.toggleScrollTop()
   },
   vuex: {

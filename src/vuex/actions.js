@@ -2,18 +2,9 @@ import cookies from 'js-cookie'
 import api from '../api'
 import * as types from './mutation-types'
 
-const needAuth = function () {
-  const path = window.location.href
-  if (path.indexOf('admin') !== -1) {
-    return 0
-  } else {
-    return 1
-  }
-}
-
 export const getArticleDetail = ({dispatch}, opts) => {
   api.getArticleDetail(opts).then(function (res) {
-    dispatch(types.GET_ARTICLE_DETAIL, res.body)
+    dispatch(types.GET_ARTICLE_DETAIL, res.body.article)
   })
 }
 
@@ -39,7 +30,6 @@ export const getNewArticles = ({dispatch}) => {
 }
 
 export const createArticle = ({dispatch}, opts) => {
-  opts['needAuth'] = needAuth()
   return api.createArticle(opts).then(function (res) {
     if (res.body.ok) {
       dispatch(types.SHOW_MESSAGE, res.body.message)
@@ -49,8 +39,14 @@ export const createArticle = ({dispatch}, opts) => {
   })
 }
 
+export const updateArticle = ({dispatch}, opts) => {
+  api.updateArticle(opts).then(function (doc) {
+    dispatch(types.UPDATE_EDIT_ARTICLE, doc)
+    console.log(doc)
+  })
+}
+
 export const removeArticleById = ({dispatch}, opts) => {
-  opts['needAuth'] = needAuth()
   return api.removeArticleById(opts).then(function (res) {
     if (res.body.ok) {
       dispatch(types.SHOW_MESSAGE, res.body.message)
@@ -67,11 +63,8 @@ export const distoryModelMessage = ({dispatch}) => {
 export const userLogin = ({dispatch}, opts) => {
   return api.userLogin(opts).then(function (res) {
     if (res.body.ok) {
-      var oldToken = cookies.get('token')
       cookies.set('token', res.body.token, { expires: 7 })
-      console.log(res.body.token === oldToken)
       dispatch(types.SHOW_MESSAGE, res.body.message)
-      dispatch(types.SAVE_TOKEN, res.body.token)
     } else {
       dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
     }

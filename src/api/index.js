@@ -38,5 +38,8 @@ export default {
   },
   createArticle (opts) {
     return adminResource.save({id: 'create'}, opts)
+  },
+  updateArticle (opts) {
+    return adminResource.save({id: 'edit'}, opts)
   }
 }

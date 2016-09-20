@@ -27,7 +27,7 @@ export default {
         {name: '文章', sourceLink: 'home'},
         {name: '分类', sourceLink: 'home'},
         {name: '标签', sourceLink: 'home'},
-        {name: '搜索', sourceLink: 'write'},
+        {name: '搜索', sourceLink: 'home'},
         {name: '站长登陆', sourceLink: 'admin'}
       ]
     }
