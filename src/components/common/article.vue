@@ -89,7 +89,7 @@ export default {
 
 .article-content {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 20pt;
 }
 </style>

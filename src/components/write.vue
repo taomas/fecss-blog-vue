@@ -34,20 +34,6 @@ export default {
       article: ''
     }
   },
-  // props: {
-  //   title: {
-  //     type: String,
-  //     default: ''
-  //   },
-  //   tags: {
-  //     type: String,
-  //     default: ''
-  //   },
-  //   article: {
-  //     type: String,
-  //     default: ''
-  //   }
-  // },
   computed: {
     markedArticle () {
       const renderer = new marked.Renderer()

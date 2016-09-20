@@ -31,7 +31,7 @@ export const getNewArticles = ({dispatch}) => {
 
 export const createArticle = ({dispatch}, opts) => {
   return api.createArticle(opts).then(function (res) {
-    if (res.body.ok) {
+    if (res.body.success) {
       dispatch(types.SHOW_MESSAGE, res.body.message)
     } else {
       dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
@@ -40,9 +40,12 @@ export const createArticle = ({dispatch}, opts) => {
 }
 
 export const updateArticle = ({dispatch}, opts) => {
-  api.updateArticle(opts).then(function (doc) {
-    dispatch(types.UPDATE_EDIT_ARTICLE, doc)
-    console.log(doc)
+  api.updateArticle(opts).then(function (res) {
+    if (res.body.success) {
+      dispatch(types.SHOW_MESSAGE, res.body.message)
+    } else {
+      dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
+    }
   })
 }
 

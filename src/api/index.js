@@ -25,7 +25,7 @@ export default {
     return articleResource.get({id: '', ...opts})
   },
   removeArticleById (opts) {
-    return articleResource.save({id: 'delete'}, opts)
+    return adminResource.save({id: 'delete'}, opts)
   },
   userLogin (opts) {
     return usersResource.save({id: 'login'}, opts)

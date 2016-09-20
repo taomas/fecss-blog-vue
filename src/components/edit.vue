@@ -4,11 +4,10 @@
       <li class="write-btn-confirm"
         @click="evtEditArticle">修改</li>
     </admin-nav>
-    <h3 class="edit-title">{{articleDetail.title}}</h3>
-    <div class="edit-sub-title">
-      <span>{{articleDetail.createTime}}</span>
-      <span>{{articleDetail.tags}}</span>
-    </div>
+    <input class="write-head-title" type="text" name="title" placeholder="请输入标题"
+      v-model="articleDetail.title">
+    <input class="write-head-tags" type="text" name="name" name="tags" value="" placeholder="标签"
+      v-model="articleDetail.tags">
     <div class="write-content rd-row-flex">
       <div class="write-panel">
         <textarea class="write-panel-textarea"
@@ -40,7 +39,8 @@ export default {
     }
   },
   watch: {
-    markedArticle () {
+    markedArticle (newVal, oldVal) {
+      this.articleDetail.content = newVal
       $('pre code').each(function (i, block) {
         highlight.highlightBlock(block)
       })
@@ -59,7 +59,6 @@ export default {
         articleId: this.$route.params.id,
         articleDetail: this.articleDetail
       }
-      console.log(opts)
       this.updateArticle(opts)
     },
     getEditArticle () {
@@ -73,7 +72,6 @@ export default {
   vuex: {
     getters: {
       articleDetail: state => state.articleDetail,
-      editArticle: state => state.editArticle,
       modelMessage: state => state.modelMessage
     },
     actions: {
