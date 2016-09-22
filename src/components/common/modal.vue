@@ -10,7 +10,7 @@
         {{modal.content}}
       </p>
       <div class="footer">
-        <button type="button" class="btn-ok"
+        <button type="button" class="btn-confirm"
          @click="confirm">确认</button>
          <button type="button" class="btn-cancel"
           @click="cancel">取消</button>
@@ -109,7 +109,7 @@ export default {
       background: #eb7372;
       cursor: pointer;
     }
-    .btn-ok {
+    .btn-confirm {
       width: 70px;
       height: 30px;
       margin-right: 10px;

@@ -14,6 +14,24 @@ export const getArticleList = ({dispatch}, opts) => {
   })
 }
 
+export const getArchiveArticles = ({dispatch}) => {
+  api.getArchiveArticles().then(function (res) {
+    dispatch(types.GET_ARCHIVE_ARTICLES, res.body.articles)
+  })
+}
+
+export const getTagsList = ({dispatch}) => {
+  api.getTagsList().then(function (res) {
+    dispatch(types.GET_TAGS_LIST, res.body.tagsList)
+  })
+}
+
+export const getTagsContent = ({dispatch}, tags) => {
+  api.getTagsContent(tags).then(function (res) {
+    dispatch(types.GET_TAGS_CONTENT, res.body.tagsContent)
+  })
+}
+
 export const getAdminArticles = ({dispatch}, opts) => {
   api.getAdminArticles(opts).then(function (res) {
     dispatch(types.GET_ADMIN_ARTICLES, res.body)
@@ -82,4 +100,8 @@ export const userRegister = ({dispatch}, opts) => {
       dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
     }
   })
+}
+
+export const showErrorMessage = ({dispatch}, message) => {
+  dispatch(types.SHOW_ERROR_MESSAGE, message)
 }

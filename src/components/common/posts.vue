@@ -15,7 +15,8 @@
               <div class="article-tags rd-row-flex">
                 <i class="icon-tags ion-ios-pricetags"></i>
                 <ul class="article-tags-list">
-                  <li class="article-tags-item">{{article.tags}}</li>
+                  <li class="article-tags-item"
+                    v-link="{name: 'tagsContent', params: {id: article.tags}}">{{article.tags}}</li>
                 </ul>
               </div>
               <span class="article-readmore"

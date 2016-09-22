@@ -1,6 +1,7 @@
 <template>
   <div class="article-container rd-col-14">
-    <article class="article-wrap">
+    <article class="article-wrap"
+      :class="{'loading': showLoading === true}">
       <h1 class="article-head-title">{{articleDetail.title}}</h1>
       <ul class="article-nav-list">
         <li class="article-nav-item">
@@ -8,7 +9,7 @@
           {{articleDetail.createTime}}
         </li>
       </ul>
-      <p class="article-content" v-html="content">
+      <p class="article-content" v-html="articleDetail.content">
       </p>
     </article>
   </div>
@@ -21,18 +22,21 @@ import { getArticleDetail } from '../../vuex/actions'
 export default {
   data () {
     return {
+      loadingStatus: ''
     }
   },
   filters: {
     marked
   },
   computed: {
-    articleId () {
-      return this.$route.params.id
-    },
     content () {
       const sourceContent = this.articleDetail.sourceContent || ''
       return marked(sourceContent)
+    }
+  },
+  watch: {
+    showLoading (newVal, oldVal) {
+
     }
   },
   methods: {
@@ -44,9 +48,21 @@ export default {
     this.getArticleDetail(this.$route.params.id)
     this.toggleScrollTop()
   },
+  route: {
+    data () {
+      console.log('data')
+    },
+    activate () {
+      console.log('in')
+    },
+    deactivate () {
+      console.log('out')
+    }
+  },
   vuex: {
     getters: {
-      articleDetail: state => state.articleDetail
+      articleDetail: state => state.articleDetail,
+      showLoading: state => state.showLoading
     },
     actions: {
       getArticleDetail
@@ -59,12 +75,12 @@ export default {
 .article-container {
   box-sizing: border-box;
   margin-left: 30px;
+  padding: 30px 20px;
+  background: #fff;
   .article-wrap {
     box-sizing: border-box;
     width: 100%;
     height: auto;
-    padding: 30px 20px;
-    background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 4px 10px rgba(0, 0, 0, 0.06);
     margin-bottom: 30px;

@@ -3,7 +3,7 @@
     <div class="sidebar-tips-head">
       <h3 class="sidebar-tips-title">提示</h3>
       <p class="sidebar-tips-content">
-        红红火火恍恍惚惚
+        该blog还未完善！
       </p>
     </div>
     <div class="sidebar-posts">

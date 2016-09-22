@@ -8,7 +8,7 @@
             文刀三授
           </a>
         </h3>
-        <span class="aside-head-subtitle">这是一个blog</span>
+        <span class="aside-head-subtitle">vue大法好</span>
       </div>
       <ul class="aside-menu-list">
         <li class="aside-menu-item"
@@ -25,9 +25,8 @@ export default {
     return {
       menus: [
         {name: '文章', sourceLink: 'home'},
-        {name: '分类', sourceLink: 'home'},
-        {name: '标签', sourceLink: 'home'},
-        {name: '搜索', sourceLink: 'home'},
+        {name: '分类', sourceLink: 'archive'},
+        {name: '标签', sourceLink: 'tags'},
         {name: '站长登陆', sourceLink: 'admin'}
       ]
     }

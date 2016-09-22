@@ -7,7 +7,10 @@ import {
   SHOW_MESSAGE,
   SHOW_ERROR_MESSAGE,
   GET_NEW_ARTICLES,
-  UPDATE_EDIT_ARTICLE
+  UPDATE_EDIT_ARTICLE,
+  GET_ARCHIVE_ARTICLES,
+  GET_TAGS_LIST,
+  GET_TAGS_CONTENT
 } from './mutation-types'
 
 Vue.use(Vuex)
@@ -21,7 +24,11 @@ const state = {
   startIndex: 0,
   maxIndex: 0,
   adminArticles: [],
-  editArticle: {}
+  archiveArticles: [],
+  tagsList: [],
+  tagsContent: [],
+  editArticle: {},
+  showLoading: false
 }
 
 const mutations = {
@@ -31,6 +38,15 @@ const mutations = {
   [GET_ARTICLE_LIST] (state, articleList) {
     state.articleList = articleList.articles
     state.maxIndex = articleList.maxIndex
+  },
+  [GET_ARCHIVE_ARTICLES] (state, archiveArticles) {
+    state.archiveArticles = archiveArticles
+  },
+  [GET_TAGS_LIST] (state, tagsList) {
+    state.tagsList = tagsList
+  },
+  [GET_TAGS_CONTENT] (state, tagsContent) {
+    state.tagsContent = tagsContent
   },
   [SHOW_MESSAGE] (state, message) {
     state.modelMessage = message

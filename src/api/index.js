@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import cookies from 'js-cookie'
+import store from '../vuex/store'
 
 Vue.use(VueResource)
 const API_ROOT = 'http://localhost:3000/'
-const articleResource = Vue.resource(API_ROOT + 'articles{/id}')
+const articleResource = Vue.resource(API_ROOT + 'articles{/id}{/controller}')
 const usersResource = Vue.resource(API_ROOT + 'users{/id}')
 const adminResource = Vue.resource(API_ROOT + 'admin{/id}')
 
 Vue.http.interceptors.push((request, next) => {
   Vue.http.headers.common['token'] = cookies.get('token') || ''
+  store.state.showLoading = true
   next((response) => {
+    store.state.showLoading = false
     if (response.status === 401) {
       window.location.pathname = '/login'
     }
@@ -23,6 +26,15 @@ export default {
   },
   getArticleList (opts) {
     return articleResource.get({id: '', ...opts})
+  },
+  getArchiveArticles () {
+    return articleResource.get({id: 'archive'})
+  },
+  getTagsList (opts) {
+    return articleResource.get({id: 'tags', ...opts})
+  },
+  getTagsContent (tags) {
+    return articleResource.get({id: 'tags', 'controller': tags})
   },
   removeArticleById (opts) {
     return adminResource.save({id: 'delete'}, opts)

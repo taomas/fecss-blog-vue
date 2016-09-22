@@ -1,71 +1,56 @@
 <template>
-  <div class="archive-container rd-col-14">
-    <h1 class="archive-head-title">分类</h1>
-    <div class="archive-wrap">
-      <section class="archive">
-        <template v-for="(index, items) in archives">
-          <h2 class="archive-year">{{index}}</h2>
-          <ul class="archive-list">
-            <li class="archive-item" v-for="item in items">
-              <span class="post-time">{{item.createTime}}</span>
-              <a class="post-title-link"
-                v-link="{name: 'page', params: {id: item._id}}">
-                {{item.title}}
-              </a>
-            </li>
-          </ul>
-        </template>
+  <div class="tags-container rd-col-14">
+    <h1 class="tags-head-title">标签</h1>
+    <div class="tags-wrap">
+      <section class="tags">
+        <h2 class="tags-year">{{tagsContent.tags}}</h2>
+        <ul class="tags-list">
+          <li class="tags-item" v-for="item in tagsContent.content">
+            <span class="post-time">{{item.createTime}}</span>
+            <a class="post-title-link"
+              v-link="{name: 'page', params: {id: item._id}}">
+              {{item.title}}
+            </a>
+          </li>
+        </ul>
       </section>
     </div>
   </div>
 </template>
 
 <script>
-import { getArchiveArticles } from '../../vuex/actions'
+import { getTagsContent } from '../../vuex/actions'
 export default {
   data () {
     return {
     }
   },
-  computed: {
-    archives () {
-      let archiveArticles = this.archiveArticles || []
-      let ans = {}
-      for (let i in archiveArticles) {
-        let time = archiveArticles[i].createTime.split('-')[0]
-        if (!ans.hasOwnProperty(time)) {
-          ans[time] = [archiveArticles[i]]
-        } else {
-          ans[time].push(archiveArticles[i])
-        }
-      }
-      return ans
-    }
+  components: {
   },
   ready () {
-    this.getArchiveArticles()
+    const tags = this.$route.params.id
+    this.getTagsContent(tags)
   },
   vuex: {
     getters: {
-      archiveArticles: state => state.archiveArticles
+      tagsContent: state => state.tagsContent
     },
     actions: {
-      getArchiveArticles
+      getTagsContent
     }
   }
 }
 </script>
 
 <style scoped>
-.archive-container {
+.tags-container {
   box-sizing: border-box;
   margin-left: 30px;
   border-radius: 5px;
   background: #fff;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.12);
 }
-
-.archive-head-title {
+.tags-head-title {
   box-sizing: border-box;
   width: 100%;
   height: 55px;
@@ -77,14 +62,12 @@ export default {
   margin: 0;
   border-bottom: 1px solid #eee;
 }
-
-.archive-wrap {
-  padding: 0 30px 30px 30px;
+.tags-wrap {
+  padding: 0 30px;
 }
-
-.archive {
+.tags {
   border-left: 2px solid #42b983;
-  .archive-year {
+  .tags-year {
     position: relative;
     padding-left: 10px;
     &::before {
@@ -100,9 +83,9 @@ export default {
       border: 1px solid #fff;
     }
   }
-  .archive-list {
+  .tags-list {
   }
-  .archive-item {
+  .tags-item {
     position: relative;
     padding: 10px 0;
     border-bottom: 1px dashed #ccc;

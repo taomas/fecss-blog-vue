@@ -2,11 +2,13 @@
   <div id="app">
     <router-view></router-view>
     <modal></modal>
+    <prograssbar></prograssbar>
   </div>
 </template>
 
 <script>
 import modal from './components/common/modal.vue'
+import prograssbar from './components/common/prograssbar.vue'
 import store from './vuex/store'
 
 export default {
@@ -27,7 +29,8 @@ export default {
     }
   },
   components: {
-    'modal': modal
+    'modal': modal,
+    'prograssbar': prograssbar
   },
   store
 }

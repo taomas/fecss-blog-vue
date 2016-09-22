@@ -24,7 +24,7 @@
 <script>
 import highlight from 'highlight.js'
 import marked from 'marked'
-import { createArticle } from '../vuex/actions'
+import { createArticle, showErrorMessage } from '../vuex/actions'
 import adminNav from './common/adminNav'
 export default {
   data () {
@@ -49,6 +49,11 @@ export default {
       return marked(this.article, { renderer: renderer })
     }
   },
+  filters: {
+    trim (value) {
+      return value.replace(/' '/g, '')
+    }
+  },
   watch: {
     markedArticle () {
       $('pre code').each(function (i, block) {
@@ -64,7 +69,25 @@ export default {
     }
   },
   methods: {
+    verifyInfo () {
+      if (this.title === '') {
+        return '请输入标题！'
+      }
+
+      if (this.tags === '') {
+        return '请输入标签！'
+      }
+
+      if (this.article.length < 30) {
+        return '文章内容不能少于30字' + this.article.length
+      }
+      return false
+    },
     evtCreateArticle () {
+      const message = this.verifyInfo()
+      if (message) {
+        return this.showErrorMessage(message)
+      }
       const opts = {
         tags: this.tags,
         title: this.title,
@@ -82,7 +105,8 @@ export default {
       modelMessage: state => state.modelMessage
     },
     actions: {
-      createArticle
+      createArticle,
+      showErrorMessage
     }
   },
   components: {

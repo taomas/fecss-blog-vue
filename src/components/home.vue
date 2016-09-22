@@ -1,7 +1,7 @@
 <template>
   <div class="home-container rd-row-flex">
     <side-left></side-left>
-    <posts></posts>
+    <router-view></router-view>
     <sidebar></sidebar>
   </div>
 </template>
