@@ -1,7 +1,8 @@
 <template>
-  <div class="article-container rd-col-14">
+  <div class="article-container rd-col-14"
+    :class="{'adapter': loadingStatus === false}">
     <article class="article-wrap"
-      :class="{'loading': showLoading === true}">
+    :class="{'transition-show': loadingStatus === true}">
       <h1 class="article-head-title">{{articleDetail.title}}</h1>
       <ul class="article-nav-list">
         <li class="article-nav-item">
@@ -9,7 +10,8 @@
           {{articleDetail.createTime}}
         </li>
       </ul>
-      <p class="article-content" v-html="articleDetail.content">
+      <p class="article-content markdown-body"
+        v-html="articleDetail.content">
       </p>
     </article>
   </div>
@@ -22,21 +24,33 @@ import { getArticleDetail } from '../../vuex/actions'
 export default {
   data () {
     return {
-      loadingStatus: ''
+      loadingStatus: false
     }
   },
   filters: {
     marked
   },
   computed: {
+    articleId () {
+      return this.$route.params.id
+    },
     content () {
       const sourceContent = this.articleDetail.sourceContent || ''
       return marked(sourceContent)
     }
   },
   watch: {
+    articleId () {
+      this.getArticleDetail(this.articleId)
+    },
     showLoading (newVal, oldVal) {
-
+      if (!newVal) {
+        setTimeout(() => {
+          this.loadingStatus = true
+        }, 300)
+      } else {
+        this.loadingStatus = false
+      }
     }
   },
   methods: {
@@ -45,19 +59,8 @@ export default {
     }
   },
   ready () {
-    this.getArticleDetail(this.$route.params.id)
+    this.getArticleDetail(this.articleId)
     this.toggleScrollTop()
-  },
-  route: {
-    data () {
-      console.log('data')
-    },
-    activate () {
-      console.log('in')
-    },
-    deactivate () {
-      console.log('out')
-    }
   },
   vuex: {
     getters: {
@@ -72,19 +75,30 @@ export default {
 </script>
 
 <style scoped>
+.adapter {
+  min-height: 1000px;
+}
+
 .article-container {
   box-sizing: border-box;
   margin-left: 30px;
   padding: 30px 20px;
   background: #fff;
-  .article-wrap {
-    box-sizing: border-box;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 4px 10px rgba(0, 0, 0, 0.06);
-    margin-bottom: 30px;
-  }
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.article-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  transition: all 0.3s;
+  opacity: 0;
+}
+
+.transition-show {
+  opacity: 1;
 }
 
 .article-head-title {
@@ -108,4 +122,6 @@ export default {
   font-size: 14px;
   line-height: 20pt;
 }
+
+
 </style>

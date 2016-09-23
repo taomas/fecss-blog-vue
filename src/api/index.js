@@ -4,7 +4,8 @@ import cookies from 'js-cookie'
 import store from '../vuex/store'
 
 Vue.use(VueResource)
-const API_ROOT = 'http://localhost:3000/'
+const API_ROOT = 'http://216.189.158.161:3000/'
+// const API_ROOT = 'http://127.0.0.1:3000/'
 const articleResource = Vue.resource(API_ROOT + 'articles{/id}{/controller}')
 const usersResource = Vue.resource(API_ROOT + 'users{/id}')
 const adminResource = Vue.resource(API_ROOT + 'admin{/id}')
