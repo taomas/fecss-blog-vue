@@ -16,7 +16,7 @@ Vue.http.interceptors.push((request, next) => {
   next((response) => {
     store.state.showLoading = false
     if (response.status === 401) {
-      window.location.pathname = '/login'
+      window.location.hash = '#!/login'
     }
   })
 })

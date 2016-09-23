@@ -11,7 +11,7 @@
             <p class="article-content-desc">
               {{{article.content | substrArticle}}}
             </p>
-            <div class="article-content-nav">
+            <div class="article-content-nav clearfix">
               <div class="article-tags rd-row-flex">
                 <i class="icon-tags ion-ios-pricetags"></i>
                 <ul class="article-tags-list">
@@ -115,7 +115,7 @@ export default {
 .posts-article-list {
   .posts-article-item {
     position: relative;
-    padding: 15px 30px 15px;
+    padding: 15px 30px 10px;
     border-bottom: 1px solid #eee;
     &:after {
       content: '';
@@ -160,7 +160,7 @@ export default {
 
 .article-content-nav {
   width: 100%;
-  height: 20px;
+  height: auto;
   padding-top: 10px;
   border-top: 1px dotted #ccc;
   .icon-tags {
