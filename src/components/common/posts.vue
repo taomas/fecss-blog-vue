@@ -1,8 +1,11 @@
 <template>
   <div class="posts-container rd-col-14">
-    <div class="posts-wrap">
+    <div class="posts-wrap"
+      :class="{'adaptor': showLoading === true}">
       <h1 class="posts-head-title">文章</h1>
-      <div class="posts-article">
+      <div class="posts-article"
+        transition="fadeIn"
+        v-show="showLoading === false">
         <ul class="posts-article-list">
           <li class="posts-article-item" v-for="article in articleList">
             <h4 class="article-head-title"
@@ -72,7 +75,8 @@ export default {
   },
   vuex: {
     getters: {
-      articleList: state => state.articleList
+      articleList: state => state.articleList,
+      showLoading: state => state.showLoading
     },
     actions: {
       getArticleList
@@ -85,6 +89,7 @@ export default {
 </script>
 
 <style scoped>
+@import '../../assets/css/animate.css';
 .posts-container {
   box-sizing: border-box;
   margin-left: 30px;
@@ -96,6 +101,9 @@ export default {
     border-radius: 5px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 4px 10px rgba(0, 0, 0, 0.06);
     margin-bottom: 30px;
+  }
+  .adaptor {
+    min-height: 1000px;
   }
 }
 

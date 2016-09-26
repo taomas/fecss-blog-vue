@@ -63,6 +63,7 @@ export default {
 @import '../../assets/css/animate.css';
 .archive-container {
   box-sizing: border-box;
+  min-height: 435px;
   margin-left: 30px;
   border-radius: 5px;
   background: #fff;
