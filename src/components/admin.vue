@@ -60,6 +60,7 @@ export default {
       this.getAdminArticles(opts)
     },
     evtRemoveArticle (articleId) {
+      // this.$Modal.create('提示', '无删除文章权限！', () => {})
       this.$Modal.create('提示', '确认删除该文章！', () => {
         const opts = {
           id: articleId
