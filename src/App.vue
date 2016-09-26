@@ -3,7 +3,7 @@
     <router-view></router-view>
     <modal></modal>
     <prograssbar></prograssbar>
-    <fork></fork>
+    <!-- <fork></fork> -->
   </div>
 </template>
 
