@@ -1,7 +1,9 @@
 <template>
   <div class="tags-container rd-col-14">
     <h1 class="tags-head-title">标签</h1>
-    <div class="tags-wrap">
+    <div class="tags-wrap"
+      transition="fadeIn"
+      v-show="showLoading === false">
       <section class="tags">
         <h2 class="tags-year">{{tagsContent.tags}}</h2>
         <ul class="tags-list">
@@ -33,7 +35,8 @@ export default {
   },
   vuex: {
     getters: {
-      tagsContent: state => state.tagsContent
+      tagsContent: state => state.tagsContent,
+      showLoading: state => state.showLoading
     },
     actions: {
       getTagsContent
@@ -43,8 +46,11 @@ export default {
 </script>
 
 <style scoped>
+@import '../../assets/css/animate.css';
+
 .tags-container {
   box-sizing: border-box;
+  min-height: 435px;
   margin-left: 30px;
   border-radius: 5px;
   background: #fff;
@@ -82,8 +88,6 @@ export default {
       border-radius: 50%;
       border: 1px solid #fff;
     }
-  }
-  .tags-list {
   }
   .tags-item {
     position: relative;

@@ -1,7 +1,9 @@
 <template>
   <div class="tags-container rd-col-14">
     <h1 class="tags-head-title">标签</h1>
-    <div class="tags-wrap">
+    <div class="tags-wrap"
+      transition="fadeIn"
+      v-show="showLoading === false">
       <h2 class="tags-title">目前共计{{tagsList.length}}个标签</h2>
       <div class="tags">
         <ul class="tags-list rd-row-flex">
@@ -27,7 +29,8 @@ export default {
   },
   vuex: {
     getters: {
-      tagsList: state => state.tagsList
+      tagsList: state => state.tagsList,
+      showLoading: state => state.showLoading
     },
     actions: {
       getTagsList
@@ -39,10 +42,13 @@ export default {
 </script>
 
 <style scoped>
+@import '../../assets/css/animate.css';
 .tags-container {
+  min-height: 435px;
   margin-left: 30px;
-  background: #fff;
+  border-radius: 5px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.12);
+  background: #fff;
   .tags-head-title {
     box-sizing: border-box;
     width: 100%;

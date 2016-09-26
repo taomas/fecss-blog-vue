@@ -1,7 +1,9 @@
 <template>
   <div class="archive-container rd-col-14">
     <h1 class="archive-head-title">分类</h1>
-    <div class="archive-wrap">
+    <div class="archive-wrap"
+      transition="fadeIn"
+      v-show="showLoading === false">
       <section class="archive">
         <template v-for="(index, items) in archives">
           <h2 class="archive-year">{{index}}</h2>
@@ -47,7 +49,8 @@ export default {
   },
   vuex: {
     getters: {
-      archiveArticles: state => state.archiveArticles
+      archiveArticles: state => state.archiveArticles,
+      showLoading: state => state.showLoading
     },
     actions: {
       getArchiveArticles
@@ -57,6 +60,7 @@ export default {
 </script>
 
 <style scoped>
+@import '../../assets/css/animate.css';
 .archive-container {
   box-sizing: border-box;
   margin-left: 30px;

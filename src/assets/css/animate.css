@@ -1,0 +1,8 @@
+.fadeIn-transition {
+  transition: all .5s ease;
+  opacity: 1;
+}
+
+.fadeIn-enter, .fadeIn-leave {
+  opacity: 0;
+}

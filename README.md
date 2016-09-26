@@ -25,3 +25,11 @@ npm run dev
 ## 项目介绍
 运行效果：
 ![blog](https://raw.githubusercontent.com/wendaosanshou/fecss-blog/master/source/blog.png)
+
+
+## 后台管理系统默认账户密码
+
+```js
+user: admin
+password: 123123
+```
