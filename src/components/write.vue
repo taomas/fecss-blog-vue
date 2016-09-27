@@ -12,20 +12,30 @@
       <div class="editor-menu">
         <ul class="editor-menu-list menu-list-left">
           <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-blod"></i>
+            <i class="menu-icon menu-icon-blod"
+              @click="evtInsert('blod')"
+            ></i>
           </li>
           <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-italic"></i>
+            <i class="menu-icon menu-icon-italic"
+              @click="evtInsert('italic')"
+            ></i>
           </li>
           <li class="verticle-line"></li>
           <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-link"></i>
+            <i class="menu-icon menu-icon-link"
+              @click="evtInsert('link')"
+            ></i>
           </li>
           <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-quote"></i>
+            <i class="menu-icon menu-icon-quote"
+              @click="evtInsert('quote')"
+            ></i>
           </li>
           <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-code"></i>
+            <i class="menu-icon menu-icon-code"
+              @click="evtInsert('code')"
+            ></i>
           </li>
           <li class="editor-menu-item">
             <i class="menu-icon menu-icon-image"></i>
@@ -79,10 +89,12 @@
 </template>
 
 <script>
+import Editor from '../util/editor.js'
 import highlight from 'highlight.js'
 import marked from 'marked'
 import { createArticle, showErrorMessage } from '../vuex/actions'
 import adminNav from './common/adminNav'
+
 export default {
   data () {
     return {
@@ -90,6 +102,7 @@ export default {
       tags: '',
       article: '',
       menus: [],
+      selectText: '',
       pullStatus: 'pull-center'
     }
   },
@@ -123,6 +136,30 @@ export default {
     }
   },
   methods: {
+    evtMouseup () {
+      let mousedownX = ''
+      let mousedownY = ''
+      $(window).on('mousedown', (event) => {
+        mousedownX = event.clientX
+        mousedownY = event.clientY
+      }).on('mouseup', (event) => {
+        if (Math.abs(event.clientX - mousedownX) > 2 || Math.abs(event.clientY - mousedownY)) {
+          // this.evtCommander()
+          this.evtChangeRange()
+        }
+      })
+    },
+    evtInsert (insertType) {
+      let editor = new Editor($('.editor-panel-textarea')[0])
+      editor.toggleChange(insertType)
+    },
+    evtCommander () {
+      let sText = document.selection === undefined ? document.getSelection().toString() : document.selection.createRange().text
+      if (sText !== '') {
+        this.selectText = sText
+        console.log(sText)
+      }
+    },
     evtPullLeft () {
       this.pullStatus = 'pull-left'
     },
@@ -165,6 +202,7 @@ export default {
     }
   },
   created () {
+    // this.evtMouseup()
   },
   vuex: {
     getters: {
