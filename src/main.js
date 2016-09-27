@@ -10,7 +10,6 @@ Vue.use(VueRouter)
 
 Vue.mixin({
   created: function () {
-    // console.log(this.$root)
     modal(Vue, this.$root)
   }
 })

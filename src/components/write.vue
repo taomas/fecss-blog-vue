@@ -141,6 +141,10 @@ export default {
         return '请输入标签！'
       }
 
+      if (this.tags.length > 5) {
+        return '您输入的标签过长！请重新输入'
+      }
+
       if ($.trim(this.article.length) < 30) {
         return '文章内容不能少于30字'
       }
@@ -149,7 +153,7 @@ export default {
     evtCreateArticle () {
       const message = this.verifyInfo()
       if (message) {
-        return this.showErrorMessage(message)
+        return this.$Modal.create('提示', message)
       }
       const opts = {
         tags: this.tags,
@@ -377,7 +381,6 @@ input {
     resize: none;
     outline: none;
     border: 0;
-    z-index: 99;
     transition: all 0.3s ease;
   }
   &.pull-left {
