@@ -4,7 +4,7 @@
 
 ## 简介
 
-``fecss-blog``是使用nodejs+mongodb+vue的个人博客系统。
+``fecss-blog``是使用nodejs+mongodb+vue的个人博客系统(功能未完善)。
 
 **此为客户端, 需要配合[服务端](https://github.com/wendaosanshou/fecss-blog-api)使用**
 

@@ -41,13 +41,19 @@
             <i class="menu-icon menu-icon-image"></i>
           </li>
           <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-olist"></i>
+            <i class="menu-icon menu-icon-olist"
+              @click="evtInsert('olist')"
+            ></i>
           </li>
           <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-ulist"></i>
+            <i class="menu-icon menu-icon-ulist"
+              @click="evtInsert('ulist')"
+            ></i>
           </li>
           <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-heading"></i>
+            <i class="menu-icon menu-icon-heading"
+              @click="evtInsert('heading')"
+            ></i>
           </li>
           <li class="editor-menu-item">
             <i class="menu-icon menu-icon-hr"></i>
