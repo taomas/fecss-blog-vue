@@ -95,66 +95,6 @@ export default {
   padding-top: 80px;
 }
 
-input {
-  display: block;
-  box-sizing: border-box;
-  padding-left: 15px;
-  outline: none;
-  border-radius: 2px;
-  border: 1px solid #ccc;
-}
-
-.write-head-title {
-  width: 100%;
-  height: 40px;
-  margin-bottom: 15px;
-}
-
-.write-head-tags {
-  width: 100%;
-  height: 35px;
-  margin-bottom: 30px;
-}
-
-.write-content {
-  box-sizing: border-box;
-  width: 100%;
-  height: 500px;
-  border: 1px solid #ccc;
-  .write-panel {
-    position: relative;
-    box-sizing: border-box;
-    width: 50%;
-    height: 100%;
-    border-right: 1px solid #ccc;
-  }
-  .write-preview {
-    box-sizing: border-box;
-    width: 50%;
-    height: 100%;
-    padding: 10px;
-    font-size: 14px;
-    color: #333;
-    overflow-y: scroll;
-  }
-}
-
-.write-panel-textarea {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  line-height: 21px;
-  margin: 0;
-  padding: 10px;
-  color: #555;
-  font-size: 14px;
-  resize: none;
-  outline: none;
-  border: 0;
-  z-index: 99;
-}
-
 .write-btn-confirm {
   float: right;
   width: 80px;

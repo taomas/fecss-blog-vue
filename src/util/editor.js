@@ -1,6 +1,8 @@
 export default class Editor {
-  constructor (element) {
+  constructor (element, vm) {
+    console.log(vm)
     this.element = element
+    this.vm = vm
     this.textValue = element.value
     this.replaceType = ''
     this.replaceContent = ''
@@ -48,12 +50,14 @@ export default class Editor {
     this.element.focus()
   }
 
-  textAsTopic (element) {
-    const rangeStart = element.selectionStart
-    const rangeEnd = element.selectionEnd
-    const tempStr1 = element.value.substring(0, rangeStart)
-    const tempStr2 = element.value.substring(rangeEnd)
-    element.value = tempStr1 + this.replaceText + tempStr2
+  textAsTopic () {
+    const rangeStart = this.element.selectionStart
+    const rangeEnd = this.element.selectionEnd
+    const tempStr1 = this.element.value.substring(0, rangeStart)
+    const tempStr2 = this.element.value.substring(rangeEnd)
+    const val = tempStr1 + this.replaceText + tempStr2
+    this.element.value = val
+    this.vm.$emit('toggleChange', val)
   }
 
   toggleChange (replaceType, linkAddress) {

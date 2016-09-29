@@ -90,6 +90,11 @@ export default {
       })
     }
   },
+  events: {
+    toggleChange (val) {
+      this.sourceArticle = val
+    }
+  },
   methods: {
     modelConfirm (linkAddress) {
       this.modalShow = false
@@ -103,7 +108,6 @@ export default {
       this.modalShow = false
     },
     evtInsert (insertType) {
-      this.editor = new Editor($('.editor-panel-textarea')[0])
       this.insertType = insertType
       if (insertType === 'image' || insertType === 'link') {
         this.modalTitle = insertType === 'image' ? '插入图片' : '插入链接'
@@ -121,6 +125,9 @@ export default {
     evtPullCenter () {
       this.pullStatus = 'pull-center'
     }
+  },
+  ready () {
+    this.editor = new Editor($('.editor-panel-textarea')[0], this)
   },
   components: {
     'editor-modal': editorModal
