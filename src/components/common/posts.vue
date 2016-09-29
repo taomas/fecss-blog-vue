@@ -12,7 +12,7 @@
               v-link="{name: 'page', params: {id: article._id}}">{{article.title}}</h4>
             <span class="article-head-time">{{article.createTime}}</span>
             <p class="article-content-desc">
-              {{{article.content | substrArticle}}}
+              {{{article.markedArticle | substrArticle}}}
             </p>
             <div class="article-content-nav clearfix">
               <div class="article-tags rd-row-flex">

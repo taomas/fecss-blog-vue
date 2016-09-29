@@ -57,8 +57,8 @@ export const createArticle = ({dispatch}, opts) => {
   })
 }
 
-export const updateArticle = ({dispatch}, opts) => {
-  api.updateArticle(opts).then(function (res) {
+export const editArticle = ({dispatch}, opts) => {
+  api.editArticle(opts).then(function (res) {
     if (res.body.success) {
       dispatch(types.SHOW_MESSAGE, res.body.message)
     } else {

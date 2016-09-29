@@ -56,75 +56,60 @@ export default class Editor {
     element.value = tempStr1 + this.replaceText + tempStr2
   }
 
-  toggleChange (replaceType) {
+  toggleChange (replaceType, linkAddress) {
     const textSelection = this.getSelected()
-    this.updateChangeText(replaceType, textSelection)
+    this.initOption(replaceType, textSelection)
+    this.updateChangeText(replaceType, linkAddress)
     this.insertTopic()
   }
 
-  toggleImage (linkAddress) {
-    this.replaceContent = '![链接描述](http://' + linkAddress + ')'
-    this.replaceText = '![链接描述](http://' + linkAddress + ')'
-    this.rangeStart = 2
-    this.rangeEnd = 6
-    this.insertTopic()
-  }
-
-  toggleLink (linkAddress) {
-    this.replaceContent = '[链接描述](http://' + linkAddress + ')'
-    this.replaceText = '[链接描述](http://' + linkAddress + ')'
-    this.rangeStart = 1
-    this.rangeEnd = 5
-    this.insertTopic()
-  }
-
-  updateOption (replaceType, textSelection) {
+  initOption (replaceType, textSelection) {
     this.replaceSymbol = this.option[replaceType + 'symbol']
     this.replaceContent = textSelection !== '' ? textSelection : this.option[replaceType + 'text']
     this.rangeStart = +this.replaceSymbol.length
     this.rangeEnd = this.rangeStart + this.replaceContent.length
   }
 
-  updateChangeText (replaceType, textSelection) {
+  updateChangeText (replaceType, linkAddress) {
     switch (replaceType) {
       case 'blod':
-        this.updateOption(replaceType, textSelection)
         this.replaceText = this.replaceSymbol + this.replaceContent + this.replaceSymbol
         break
       case 'italic':
-        this.updateOption(replaceType, textSelection)
         this.replaceText = this.replaceSymbol + this.replaceContent + this.replaceSymbol
         break
       case 'link':
-        if (!textSelection) {
-          this.replaceContent = '[链接描述](http://example.com/)'
-          this.replaceText = '[链接描述](http://example.com/)'
+        if (linkAddress) {
+          this.replaceContent = '[链接描述](http://' + linkAddress + ')'
+          this.replaceText = '[链接描述](http://' + linkAddress + ')'
           this.rangeStart = 1
           this.rangeEnd = 5
         }
         break
+      case 'image':
+        if (linkAddress) {
+          this.replaceContent = '![链接描述](http://' + linkAddress + ')'
+          this.replaceText = '![链接描述](http://' + linkAddress + ')'
+          this.rangeStart = 2
+          this.rangeEnd = 6
+        }
+        break
       case 'quote':
-        this.updateOption(replaceType, textSelection)
         this.replaceText = this.replaceSymbol + this.replaceContent
         break
       case 'code':
-        this.updateOption(replaceType, textSelection)
         this.rangeStart = +this.replaceSymbol.length + 1
         this.rangeEnd = this.rangeStart + this.replaceContent.length
         this.replaceText = this.replaceSymbol + '\n' + this.replaceContent + '\n' + this.replaceSymbol
         break
       case 'olist':
-        this.updateOption(replaceType, textSelection)
         break
       case 'ulist':
-        this.updateOption(replaceType, textSelection)
         break
       case 'heading':
-        this.updateOption(replaceType, textSelection)
         this.replaceText = this.replaceSymbol + this.replaceContent
         break
       case 'hr':
-        this.updateOption(replaceType, textSelection)
         this.replaceText = this.replaceSymbol + this.replaceContent
         break
       default:

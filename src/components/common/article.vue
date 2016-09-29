@@ -11,7 +11,7 @@
         </li>
       </ul>
       <p class="article-content markdown-body"
-        v-html="articleDetail.content">
+        v-html="articleDetail.markedArticle">
       </p>
     </article>
   </div>

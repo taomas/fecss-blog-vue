@@ -4,46 +4,40 @@
       <li class="write-btn-confirm"
         @click="evtEditArticle">修改</li>
     </admin-nav>
-    <input class="write-head-title" type="text" name="title" placeholder="请输入标题"
-      v-model="articleDetail.title">
-    <input class="write-head-tags" type="text" name="name" name="tags" value="" placeholder="标签"
-      v-model="articleDetail.tags">
-    <div class="write-content rd-row-flex">
-      <div class="write-panel">
-        <textarea class="write-panel-textarea"
-          v-model="articleDetail.sourceContent"
-          debounce="300"
-          ></textarea>
-      </div>
-      <div class="write-preview markdown-body" v-html="markedArticle">
-      </div>
-    </div>
+    <editor v-ref:editor></editor>
   </div>
 </template>
 
 <script>
-import highlight from 'highlight.js'
-import marked from 'marked'
-import { createArticle, getArticleDetail, updateArticle } from '../vuex/actions'
+import { createArticle, getArticleDetail, editArticle } from '../vuex/actions'
 import adminNav from './common/adminNav'
+import editor from './common/editor'
 export default {
   data () {
     return {
     }
   },
   computed: {
+    title () {
+      return this.$refs.editor.title
+    },
+    tags () {
+      return this.$refs.editor.tags
+    },
+    sourceArticle () {
+      return this.$refs.editor.sourceArticle
+    },
     markedArticle () {
-      let renderer = new marked.Renderer()
-      let content = this.articleDetail.sourceContent || ''
-      return marked(content, { renderer: renderer })
+      return this.$refs.editor.markedArticle
     }
   },
   watch: {
-    markedArticle (newVal, oldVal) {
-      this.articleDetail.content = newVal
-      $('pre code').each(function (i, block) {
-        highlight.highlightBlock(block)
-      })
+    articleDetail (newVal, oldVal) {
+      if (newVal) {
+        this.$refs.editor.title = newVal.title
+        this.$refs.editor.tags = newVal.tags
+        this.$refs.editor.sourceArticle = newVal.sourceArticle
+      }
     },
     modelMessage (newVal, oldVal) {
       if (newVal) {
@@ -57,9 +51,14 @@ export default {
     evtEditArticle () {
       const opts = {
         articleId: this.$route.params.id,
-        articleDetail: this.articleDetail
+        articleDetail: {
+          title: this.title,
+          tags: this.tags,
+          sourceArticle: this.sourceArticle,
+          markedArticle: this.markedArticle
+        }
       }
-      this.updateArticle(opts)
+      this.editArticle(opts)
     },
     getEditArticle () {
       const articleId = this.$route.params.id
@@ -77,11 +76,12 @@ export default {
     actions: {
       createArticle,
       getArticleDetail,
-      updateArticle
+      editArticle
     }
   },
   components: {
-    'admin-nav': adminNav
+    'admin-nav': adminNav,
+    'editor': editor
   }
 }
 </script>
