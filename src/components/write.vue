@@ -11,54 +11,19 @@
     <div class="editor-content">
       <div class="editor-menu">
         <ul class="editor-menu-list menu-list-left">
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-blod"
-              @click="evtInsert('blod')"
-            ></i>
-          </li>
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-italic"
-              @click="evtInsert('italic')"
-            ></i>
-          </li>
-          <li class="verticle-line"></li>
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-link"
-              @click="evtInsert('link')"
-            ></i>
-          </li>
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-quote"
-              @click="evtInsert('quote')"
-            ></i>
-          </li>
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-code"
-              @click="evtInsert('code')"
-            ></i>
-          </li>
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-image"></i>
-          </li>
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-olist"
-              @click="evtInsert('olist')"
-            ></i>
-          </li>
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-ulist"
-              @click="evtInsert('ulist')"
-            ></i>
-          </li>
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-heading"
-              @click="evtInsert('heading')"
-            ></i>
-          </li>
-          <li class="editor-menu-item">
-            <i class="menu-icon menu-icon-hr"></i>
-          </li>
-          <li class="verticle-line"></li>
+          <template
+            v-for="item in menus"
+            track-by="$index">
+              <li
+                v-if="item === 'line'"
+                class="verticle-line"></li>
+              <li class="editor-menu-item"
+                v-if="item !== 'line'">
+                <i class="menu-icon menu-icon-{{item}}"
+                  @click="evtInsert(item)"
+                ></i>
+              </li>
+          </template>
         </ul>
         <ul class="editor-menu-list menu-list-right">
           <li class="verticle-line"></li>
@@ -81,16 +46,17 @@
       </div>
       <div class="editor-content-panel rd-row-flex"
         :class="pullStatus">
-        <!-- <div class="editor-panel"> -->
         <textarea class="editor-panel-textarea"
           v-model="article"
           debounce="300"
           ></textarea>
-        <!-- </div> -->
         <div class="editor-preview markdown-body" v-html="markedArticle">
         </div>
       </div>
     </div>
+    <editor-modal
+      :modal-show="modalShow"
+      :modal-title="modalTitle"><editor-modal>
   </div>
 </template>
 
@@ -100,6 +66,7 @@ import highlight from 'highlight.js'
 import marked from 'marked'
 import { createArticle, showErrorMessage } from '../vuex/actions'
 import adminNav from './common/adminNav'
+import editorModal from './common/editorModal'
 
 export default {
   data () {
@@ -107,9 +74,13 @@ export default {
       title: '',
       tags: '',
       article: '',
-      menus: [],
+      menus: ['blod', 'italic', 'line', 'link', 'quote', 'code', 'image', 'line', 'olist', 'ulist', 'heading', 'hr', 'line'],
       selectText: '',
-      pullStatus: 'pull-center'
+      pullStatus: 'pull-center',
+      modalShow: false,
+      modalTitle: '插入链接',
+      insertType: '',
+      editor: {}
     }
   },
   computed: {
@@ -142,28 +113,25 @@ export default {
     }
   },
   methods: {
-    evtMouseup () {
-      let mousedownX = ''
-      let mousedownY = ''
-      $(window).on('mousedown', (event) => {
-        mousedownX = event.clientX
-        mousedownY = event.clientY
-      }).on('mouseup', (event) => {
-        if (Math.abs(event.clientX - mousedownX) > 2 || Math.abs(event.clientY - mousedownY)) {
-          // this.evtCommander()
-          this.evtChangeRange()
-        }
-      })
+    modelConfirm (link) {
+      this.modalShow = false
+      if (this.insertType === 'image') {
+        this.editor.toggleImage(link)
+      } else {
+        this.editor.toggleLink(link)
+      }
+    },
+    modelCancel (link) {
+      this.modalShow = false
     },
     evtInsert (insertType) {
-      let editor = new Editor($('.editor-panel-textarea')[0])
-      editor.toggleChange(insertType)
-    },
-    evtCommander () {
-      let sText = document.selection === undefined ? document.getSelection().toString() : document.selection.createRange().text
-      if (sText !== '') {
-        this.selectText = sText
-        console.log(sText)
+      this.editor = new Editor($('.editor-panel-textarea')[0])
+      this.insertType = insertType
+      if (insertType === 'image' || insertType === 'link') {
+        this.modalTitle = insertType === 'image' ? '插入图片' : '插入链接'
+        this.modalShow = true
+      } else {
+        this.editor.toggleChange(insertType)
       }
     },
     evtPullLeft () {
@@ -207,9 +175,6 @@ export default {
       this.createArticle(opts)
     }
   },
-  created () {
-    // this.evtMouseup()
-  },
   vuex: {
     getters: {
       editArticle: state => state.editArticle,
@@ -221,7 +186,8 @@ export default {
     }
   },
   components: {
-    'admin-nav': adminNav
+    'admin-nav': adminNav,
+    'editor-modal': editorModal
   }
 }
 </script>

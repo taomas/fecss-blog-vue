@@ -27,7 +27,8 @@ npm run dev
 ![blog](https://raw.githubusercontent.com/wendaosanshou/fecss-blog/master/source/blog.png)
 
 
-## 后台管理系统默认账户密码
+## 后台管理系统默认账户密码（demo链接）
+> 本地启动的服务，需要自己注册账户才能够登陆。
 
 ```js
 user: admin
