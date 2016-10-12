@@ -1,6 +1,6 @@
 @import 'normalize';
 @import 'default';
-@import 'clearfix'; 
+@import 'clearfix';
 
 * {
   box-sizing: border-box;
@@ -36,8 +36,8 @@ button,input,select,textarea {
 
 ul,
 ol {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 

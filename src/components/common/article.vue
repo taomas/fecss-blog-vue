@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import marked from 'marked'
+import highlight from 'highlight.js'
 import { getArticleDetail } from '../../vuex/actions'
 
 export default {
@@ -27,16 +27,9 @@ export default {
       loadingStatus: false
     }
   },
-  filters: {
-    marked
-  },
   computed: {
     articleId () {
       return this.$route.params.id
-    },
-    content () {
-      const sourceContent = this.articleDetail.sourceContent || ''
-      return marked(sourceContent)
     }
   },
   watch: {
@@ -51,6 +44,19 @@ export default {
       } else {
         this.loadingStatus = false
       }
+    },
+    articleDetail () {
+      // 数据返回后高亮代码块
+      $('pre code').each(function (i, block) {
+        highlight.highlightBlock(block)
+      })
+      $('.hljs').each(function (i, item) {
+        let $this = $(item)
+        let matchLang = $this.attr('class').match(/lang\-[a-z]+/)
+        let language = matchLang ? matchLang[0].split('-')[1] : 'code'
+        $this.attr('data-language', language)
+      })
+      $('a').attr('target', '_blank')
     }
   },
   methods: {

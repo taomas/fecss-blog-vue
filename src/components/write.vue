@@ -91,7 +91,6 @@ export default {
 </script>
 
 <style scoped>
-@import '../assets/css/marked.css';
 @import '../assets/css/baseicon.css';
 .write-container {
   width: 70%;

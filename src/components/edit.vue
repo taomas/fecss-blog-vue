@@ -87,7 +87,6 @@ export default {
 </script>
 
 <style scoped>
-@import '../assets/css/marked.css';
 .write-container {
   width: 70%;
   height: auto;

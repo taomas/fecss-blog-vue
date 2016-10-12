@@ -1,6 +1,5 @@
 export default class Editor {
   constructor (element, vm) {
-    console.log(vm)
     this.element = element
     this.vm = vm
     this.textValue = element.value
@@ -16,6 +15,9 @@ export default class Editor {
 
       linksymbol: '',
       linktext: '[链接](http://example.com/)',
+
+      imagesymbol: '',
+      imagetext: '![链接](http://example.com/)',
 
       quotesymbol: '>',
       quotetext: '引用文字',
@@ -57,7 +59,7 @@ export default class Editor {
     const tempStr2 = this.element.value.substring(rangeEnd)
     const val = tempStr1 + this.replaceText + tempStr2
     this.element.value = val
-    this.vm.$emit('toggleChange', val)
+    this.vm.$emit('updateText', val)
   }
 
   toggleChange (replaceType, linkAddress) {

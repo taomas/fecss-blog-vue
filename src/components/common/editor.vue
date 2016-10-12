@@ -68,7 +68,7 @@ export default {
       title: '',
       tags: '',
       sourceArticle: '',
-      menus: ['blod', 'italic', 'line', 'link', 'quote', 'code', 'image', 'line', 'olist', 'ulist', 'heading', 'hr', 'line'],
+      menus: ['blod', 'italic', 'line', 'link', 'quote', 'code', 'image', 'line', 'heading', 'hr', 'line'],
       selectText: '',
       pullStatus: 'pull-center',
       modalShow: false,
@@ -88,21 +88,24 @@ export default {
       $('pre code').each(function (i, block) {
         highlight.highlightBlock(block)
       })
+      $('.hljs').each(function (i, item) {
+        let $this = $(item)
+        let matchLang = $this.attr('class').match(/lang\-[a-z]+/)
+        let language = matchLang ? matchLang[0].split('-')[1] : 'code'
+        $this.attr('data-language', language)
+      })
+      $('a').attr('target', '_blank')
     }
   },
   events: {
-    toggleChange (val) {
+    updateText (val) {
       this.sourceArticle = val
     }
   },
   methods: {
     modelConfirm (linkAddress) {
       this.modalShow = false
-      if (this.insertType === 'image') {
-        this.editor.toggleChange(this.insertType, linkAddress)
-      } else {
-        this.editor.toggleChange(this.insertType, linkAddress)
-      }
+      this.editor.toggleChange(this.insertType, linkAddress)
     },
     modelCancel (link) {
       this.modalShow = false
@@ -295,7 +298,7 @@ input {
 .editor-content-panel {
   box-sizing: border-box;
   width: 100%;
-  height: 500px;
+  height: 600px;
   .editor-panel {
     position: relative;
     box-sizing: border-box;
@@ -312,6 +315,7 @@ input {
     color: #333;
     border-left: 1px solid #ddd;
     transition: all 0.3s ease;
+    overflow: auto;
   }
   .editor-panel-textarea {
     display: block;
