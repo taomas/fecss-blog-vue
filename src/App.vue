@@ -81,7 +81,9 @@ html, body {
   }
   code {
     position: relative;
+    box-sizing: border-box;
     padding: 1em;
+    max-height: 35em;
     &:after {
       content: attr(data-language);
       position: absolute;

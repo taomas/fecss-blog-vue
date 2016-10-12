@@ -85,6 +85,18 @@ export default {
   },
   watch: {
     markedArticle () {
+      window.setTimeout(() => {
+        this.updateMarkedStyle()
+      }, 0)
+    }
+  },
+  events: {
+    updateText (val) {
+      this.sourceArticle = val
+    }
+  },
+  methods: {
+    updateMarkedStyle () {
       $('pre code').each(function (i, block) {
         highlight.highlightBlock(block)
       })
@@ -95,14 +107,7 @@ export default {
         $this.attr('data-language', language)
       })
       $('a').attr('target', '_blank')
-    }
-  },
-  events: {
-    updateText (val) {
-      this.sourceArticle = val
-    }
-  },
-  methods: {
+    },
     modelConfirm (linkAddress) {
       this.modalShow = false
       this.editor.toggleChange(this.insertType, linkAddress)

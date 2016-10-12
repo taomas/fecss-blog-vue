@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { createArticle, getArticleDetail, editArticle } from '../vuex/actions'
+import { getArticleDetail, editArticle } from '../vuex/actions'
 import adminNav from './common/adminNav'
 import editor from './common/editor'
 export default {
@@ -74,7 +74,6 @@ export default {
       modelMessage: state => state.modelMessage
     },
     actions: {
-      createArticle,
       getArticleDetail,
       editArticle
     }

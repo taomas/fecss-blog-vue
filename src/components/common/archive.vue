@@ -139,6 +139,7 @@ export default {
       font-size: 14px;
     }
     .post-title-link {
+      display: block;
       font-size: 16px;
       margin-left: 140px;
       color: #42b983;

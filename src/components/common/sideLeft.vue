@@ -8,7 +8,7 @@
             文刀三授
           </a>
         </h3>
-        <span class="aside-head-subtitle">vue大法好</span>
+        <span class="aside-head-subtitle">前端小菜鸟</span>
       </div>
       <ul class="aside-menu-list">
         <li class="aside-menu-item"

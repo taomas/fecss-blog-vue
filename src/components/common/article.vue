@@ -46,6 +46,16 @@ export default {
       }
     },
     articleDetail () {
+      window.setTimeout(() => {
+        this.updateMarkedStyle()
+      }, 0)
+    }
+  },
+  methods: {
+    toggleScrollTop () {
+      $(window).scrollTop(0)
+    },
+    updateMarkedStyle () {
       // 数据返回后高亮代码块
       $('pre code').each(function (i, block) {
         highlight.highlightBlock(block)
@@ -57,11 +67,6 @@ export default {
         $this.attr('data-language', language)
       })
       $('a').attr('target', '_blank')
-    }
-  },
-  methods: {
-    toggleScrollTop () {
-      $(window).scrollTop(0)
     }
   },
   ready () {
