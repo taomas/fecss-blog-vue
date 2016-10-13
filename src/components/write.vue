@@ -61,6 +61,7 @@ export default {
       return false
     },
     evtCreateArticle () {
+      const date = new Date()
       const message = this.verifyInfo()
       if (message) {
         return this.$Modal.create('提示', message)
@@ -69,7 +70,8 @@ export default {
         tags: this.tags,
         title: this.title,
         sourceArticle: this.sourceArticle,
-        markedArticle: this.markedArticle
+        markedArticle: this.markedArticle,
+        createTime: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
       }
       this.createArticle(opts)
     }
